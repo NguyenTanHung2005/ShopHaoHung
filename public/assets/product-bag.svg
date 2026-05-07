@@ -1,0 +1,11 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="600" rx="40" fill="#FFF7ED"/>
+<circle cx="650" cy="130" r="120" fill="#FFEDD5"/>
+<path d="M270 238C270 199 301 168 340 168H460C499 168 530 199 530 238V286H270V238Z" stroke="#EA580C" stroke-width="24"/>
+<path d="M244 278H556C583 278 604 299 604 326V470C604 497 583 518 556 518H244C217 518 196 497 196 470V326C196 299 217 278 244 278Z" fill="#FB923C"/>
+<path d="M308 278V238C308 214 327 196 351 196H449C473 196 492 214 492 238V278" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+<path d="M300 350H500" stroke="#FFF7ED" stroke-width="18" stroke-linecap="round" opacity="0.85"/>
+<path d="M300 400H500" stroke="#FFF7ED" stroke-width="18" stroke-linecap="round" opacity="0.85"/>
+<text x="60" y="90" fill="#9A3412" font-size="42" font-weight="700" font-family="Arial, sans-serif">Sport Bag</text>
+<text x="60" y="140" fill="#C2410C" font-size="22" font-weight="400" font-family="Arial, sans-serif">Durable backpack for travel</text>
+</svg>
