@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/common';
 import { useCartStore } from '@/store/cartStore';
+import { useAuth } from '@/hooks';
 import { formatCurrency } from '@/lib/utils';
 
 export default function CartPage() {
@@ -11,37 +11,16 @@ export default function CartPage() {
   const total = useCartStore((state) => state.total);
   const removeItem = useCartStore((state) => state.removeItem);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
-  const setCart = useCartStore((state) => state.setCart);
   const clearCart = useCartStore((state) => state.clearCart);
-  const [hydrated, setHydrated] = useState(false);
+  const { isHydrated } = useAuth();
 
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      return;
-    }
-
-    const savedItems = window.localStorage.getItem('cart-items');
-    if (savedItems) {
-      try {
-        const parsed = JSON.parse(savedItems) as typeof items;
-        if (Array.isArray(parsed)) {
-          setCart(parsed);
-        }
-      } catch {
-        window.localStorage.removeItem('cart-items');
-      }
-    }
-
-    setHydrated(true);
-  }, [setCart]);
-
-  useEffect(() => {
-    if (!hydrated || typeof window === 'undefined') {
-      return;
-    }
-
-    window.localStorage.setItem('cart-items', JSON.stringify(items));
-  }, [hydrated, items]);
+  if (!isHydrated) {
+    return (
+      <div className="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-600 shadow-sm">
+        Đang tải giỏ hàng...
+      </div>
+    );
+  }
 
   const handleUpdateQuantity = (productId: string, quantity: number) => {
     updateQuantity(productId, quantity);

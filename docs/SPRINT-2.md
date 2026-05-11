@@ -13,10 +13,12 @@
 - [x] Role-based access control (RBAC)
 - [x] Hydration flag to prevent flickering
 - [x] Account icon in header
+- [x] Dashboard link in header only for admin
 
 ## ✅ Tasks Hoàn Thành
 
 ### 1. Authentication System
+
 - [x] Login route handler (`/api/auth/login`)
   - Email validation
   - Password check (mock: all passwords are "123456")
@@ -34,18 +36,22 @@
   - Clear localStorage session
 
 ### 2. useAuth Hook
+
 - [x] Auth state management (user, token, isHydrated)
+- [x] Shared auth store so all components update immediately
 - [x] Session persistence with localStorage
 - [x] isHydrated flag to prevent SSR mismatch
 - [x] Login/signup/logout callbacks
 - [x] Auto-restore session on page load
 
 ### 3. Protected Routes
+
 - [x] Middleware for `/account`, `/cart`
 - [x] Redirect unauthenticated users to `/auth/login`
 - [x] Query parameter for post-login redirect
 
 ### 4. Account Page
+
 - [x] User profile display
 - [x] User information (name, email, role, join date)
 - [x] Avatar display (placeholder)
@@ -53,6 +59,7 @@
 - [x] Edit profile entry point
 
 ### 5. Role-Based Access Control
+
 - [x] User role field ("admin" | "user")
 - [x] MOCK_USERS with role assignment
 - [x] Admin: admin@example.com
@@ -60,10 +67,12 @@
 - [x] Role display in UI
 
 ### 6. UI Enhancements
+
 - [x] Account icon with avatar in header
 - [x] Show avatar initials
 - [x] Responsive navigation for authenticated users
 - [x] Smooth auth state transitions
+- [x] Header hides Dashboard link for non-admin users
 
 ## 🛠️ Files Modified/Created
 
@@ -82,6 +91,7 @@
 ## 🔑 Key Features
 
 ### Authentication Flow
+
 1. User enters email/password
 2. Form validates with Zod
 3. POST to `/api/auth/login`
@@ -91,19 +101,25 @@
 7. Redirect to protected page or home
 
 ### Session Management
+
 - Token stored in httpOnly cookie (secure, not accessible to JavaScript)
 - Session data stored in localStorage (for client-side access)
 - Auto-restore on page refresh
 - Manual logout clears both
+- Login/logout updates the shared auth store immediately, so header and dashboard change without reload
+- Cart data is restored per authenticated user after session hydration
 
 ### Role-Based Features
+
 - Admin users can access `/dashboard`
 - Regular users cannot access admin routes
 - Role displayed in header & profile
+- Header shows Dashboard navigation only when `user.role === 'admin'`
 
 ## 📊 Demo Data
 
 ### Users
+
 ```typescript
 {
   id: '1',
@@ -128,22 +144,29 @@
 ## 🧪 Testing
 
 ### Admin Login
+
 - Email: `admin@example.com`
 - Password: `123456`
 - Expected: Redirect to `/dashboard`
 - Role: "admin" badge in profile
+- Dashboard link appears immediately in header without refresh
 
 ### User Login
+
 - Email: `user@example.com`
 - Password: `123456`
 - Expected: Redirect to `/account`
 - Role: "user" badge in profile
+- Header updates immediately without refresh
 
 ### Protected Routes
+
 - Try `/account` unauthenticated → Redirect to `/auth/login?redirect=/account`
 - Try `/dashboard` as user → Redirect to `/`
+- Log in as different users → each account restores its own cart data
 
 ## ✨ Next Steps (Sprint 3)
+
 - Dashboard CRUD functionality
 - Image upload with preview
 - API endpoints for admin operations

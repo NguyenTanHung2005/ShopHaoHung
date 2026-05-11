@@ -17,6 +17,7 @@
 ## ✅ Tasks Hoàn Thành
 
 ### 1. Shop Page Enhancements
+
 - [x] Search by keyword (real-time filtering)
 - [x] Filter controls:
   - Category dropdown
@@ -33,6 +34,7 @@
 - [x] "Add to Cart" buttons
 
 ### 2. Product Detail Page
+
 - [x] Full product information
 - [x] Large product image
 - [x] Product specifications:
@@ -47,7 +49,8 @@
 - [x] Breadcrumb navigation
 
 ### 3. Cart Management
-- [x] Zustand cart store with persistence
+
+- [x] Zustand cart store with persistence per authenticated user
 - [x] Add item to cart
 - [x] Remove item from cart
 - [x] Update quantity
@@ -55,6 +58,7 @@
 - [x] Cart badge in header showing item count
 
 ### 4. Cart Page
+
 - [x] Cart items table with:
   - Product image & name
   - Price
@@ -71,6 +75,7 @@
 - [x] Empty cart message
 
 ### 5. Checkout Flow
+
 - [x] Customer info form
 - [x] Shipping address form
 - [x] Payment method selection
@@ -79,6 +84,7 @@
 - [x] Order number generation
 
 ### 6. Search Page
+
 - [x] Search term display
 - [x] Search results listing
 - [x] No results message
@@ -86,6 +92,7 @@
 - [x] Back to home link
 
 ### 7. Demo Page (NEW)
+
 - [x] Visual guide for user and admin accounts
 - [x] Credentials display (formatted boxes)
 - [x] Quick login buttons (instant localStorage setup)
@@ -95,6 +102,7 @@
 - [x] Professional styling with gradients
 
 ### 8. Demo Page Features
+
 - [x] Admin Account card (blue theme)
   - Email: admin@example.com
   - Password: 123456
@@ -131,21 +139,25 @@
 ## 📊 Key Features
 
 ### Search & Filter Performance
+
 - Debounced search (300ms) for optimal performance
 - Real-time filter updates
 - Sort options don't require API calls
 - Pagination state in URL (optional)
 
 ### Cart Persistence
-- Cart data stored in localStorage
+
+- Cart data stored in localStorage per user session
 - Auto-restore on page refresh
 - Real-time total calculation
 - Badge shows item count in header
 
 ### Demo Quick Login
+
 - Click "Đăng nhập ngay" button
 - Instantly sets localStorage session
 - Redirects to appropriate dashboard
+- Shared auth state updates header and dashboard immediately after login
 - No form filling needed
 - Perfect for product demos
 
@@ -162,6 +174,7 @@
 - [x] User demo redirects to `/account`
 
 ## ✨ Next Steps (Sprint 5)
+
 - SSR/SSG optimization
 - Image optimization with next/image
 - SEO metadata & Open Graph

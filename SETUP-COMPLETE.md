@@ -1,68 +1,219 @@
-# 🎯 Project Setup Complete - ShopHaoHung Web Application
-**Status**: ✅ **READY FOR DEVELOPMENT**  
-**Date Created**: Mai 7, 2024  
-Your ShopHaoHung project is **ready for Sprint 2**!
----
-## 📦 Deliverables - Sprint 1
-### ✅ Project Structure
-```
-shop-haohung/
-## 📞 Support & Resources
----
-## 🎉 Congratulations!
-Your ShopHaoHung project is **ready for Sprint 2**!
-The foundation is solid, components are scalable, and the team can now focus on real authentication and API integration.
-# 🎯 Project Setup Complete - Sports Shop Web Application
+# 🎯 Project Development Progress - ShopHaoHung Web Application
 
-**Status**: ✅ **READY FOR DEVELOPMENT**  
-**Date Created**: Mai 7, 2024  
+**Current Status**: ✅ **SPRINTS 1-5 COMPLETE** | 🔄 **SPRINT 6 IN PROGRESS**  
+**Last Updated**: January 2025  
 **Dev Server**: http://localhost:3000  
-**Sprint**: Sprint 1 - Complete
+**Build Status**: ✅ Passing
 
 ---
 
-## 📦 Deliverables - Sprint 1
+## 📊 Development Progress Summary
 
-### ✅ Project Infrastructure
-- [x] Next.js 15 + React 19 + TypeScript
-- [x] Tailwind CSS for styling
-- [x] ESLint + Prettier for code quality
-- [x] Husky for pre-commit hooks
-- [x] Environment configuration (.env.example, .env.local)
+| Sprint   | Status                  | Focus             | Key Features                                                               |
+| -------- | ----------------------- | ----------------- | -------------------------------------------------------------------------- |
+| Sprint 1 | ✅ Complete             | Setup & UI        | Project structure, components library, design system                       |
+| Sprint 2 | ✅ Complete             | Auth & Accounts   | Login, signup, RBAC, session management                                    |
+| Sprint 3 | ✅ Complete             | Dashboard & Admin | CRUD for products, orders, users, real API endpoints                       |
+| Sprint 4 | ✅ Complete             | Shop Experience   | Search, filter, pagination, cart management, product details               |
+| Sprint 5 | ✅ Complete (Phase 1+2) | Performance       | Image optimization, SEO, Web Vitals, caching, ISR/SSG, bundle optimization |
+| Sprint 6 | 🔄 In Progress          | Testing & Deploy  | Unit tests, E2E tests, CI/CD, production deployment                        |
 
-### ✅ Project Structure
-- [x] App Router routing system (Auth, Shop, Dashboard groups)
-- [x] Components library (7 reusable components)
-- [x] Custom hooks (useAuth, useDebounce, useFetch)
-- [x] Zustand state management (cartStore, uiStore)
-- [x] TypeScript type definitions
-- [x] Constants & utilities
-- [x] Mock data module
+---
 
-### ✅ Components Created
+## 🎉 Sprint 5 - Performance & Optimization Completed
+
+### Image Optimization ✅
+
+- [x] Configured WebP/AVIF format support
+- [x] Lazy loading with next/image
+- [x] Responsive image sizes
+- [x] Quality optimization (92)
+
+### SEO & Metadata ✅
+
+- [x] Comprehensive metadata in app/layout.tsx
+- [x] Open Graph tags for social sharing
+- [x] Twitter Card support
+- [x] robots.txt for crawlers
+- [x] Dynamic sitemap generation (app/sitemap.ts)
+
+### Performance Monitoring ✅
+
+- [x] Web Vitals tracking library (lib/web-vitals.ts)
+- [x] API endpoint for metrics (app/api/vitals/route.ts)
+- [x] LCP, FID, CLS tracking
+- [x] sendBeacon for analytics
+
+### Rendering & Monitoring ✅
+
+- [x] ISR on shop listing (`app/(shop)/shop/page.tsx`) - `revalidate = 3600`
+- [x] SSG for static pages: `app/about/page.tsx`, `app/terms/page.tsx` (force-static)
+- [x] Web Vitals dashboard placeholder: `app/(dashboard)/vitals/page.tsx`
+
+### Caching & Bundle Optimization ✅
+
+- [x] HTTP cache headers (1-hour default, 1-year for /\_next/\*)
+- [x] Dynamic imports for ProductCard
+- [x] SWC minification enabled
+- [x] Tailwind CSS purging
+- [x] Font optimization (Geist preloaded)
+
+---
+
+## 📝 Files Created/Updated in Sprint 5
+
+### Created Files
+
+- `app/api/vitals/route.ts` - Web Vitals metrics endpoint
+- `public/robots.txt` - SEO crawler configuration
+- `app/sitemap.ts` - Dynamic sitemap generation
+- `lib/web-vitals.ts` - Web Vitals tracking library
+
+### Updated Files
+
+- `next.config.ts` - Image optimization & caching headers
+- `app/layout.tsx` - Enhanced SEO metadata
+- `app/page.tsx` - Dynamic imports & optimized loading
+- `README.md` - Updated feature documentation
+- `docs/SPRINT-5.md` - Detailed Sprint 5 progress
+
+---
+
+## 🚀 Getting Started
+
+### Installation
+
+```bash
+npm install
 ```
+
+### Development
+
+```bash
+npm run dev
+# Open http://localhost:3000
+```
+
+### Production Build
+
+```bash
+npm run build
+npm run start
+```
+
+---
+
+## 📋 Project Features
+
+### Core E-Commerce
+
+- User authentication (login, signup, logout)
+- Product browsing with search, filter, sort, pagination
+- Per-user shopping cart with persistence
+- Product detail pages with recommendations
+- Admin dashboard with CRUD operations
+- Role-based access control (admin/user)
+
+### Performance Features (Sprint 5)
+
+- Image optimization with WebP/AVIF format
+- SEO-friendly metadata and Open Graph
+- Web Vitals performance monitoring
+- HTTP cache headers for faster repeat visits
+- Dynamic code splitting for smaller bundles
+- 1-year caching for static assets
+- **Agent Skill Applied**: Eliminating Waterfalls (1.5 Promise.all) for concurrent data fetching in CRUD operations
+
+---
+
+## ✨ Next Steps (Sprint 6)
+
+### Testing
+
+- [x] Jest unit tests for components
+- [x] React Testing Library for component testing
+- [x] Playwright E2E tests for user flows
+- [ ] API endpoint testing
+
+### CI/CD & Deployment
+
+- [x] GitHub Actions workflow setup
+- [x] Automated tests on push
+- [x] Build verification
+- [ ] Automatic deployment to Vercel
+
+### Post-Deployment
+
+- [ ] Performance monitoring in production
+- [ ] Error tracking and logging
+- [ ] Lighthouse CI integration
+- [ ] Final bug fixes and optimizations
+
+---
+
+## 🔧 Tech Stack
+
+- **Frontend**: Next.js 16, React 19, TypeScript, Tailwind CSS v4
+- **State Management**: Zustand 4.x
+- **Authentication**: JWT + HttpOnly Cookies + localStorage
+- **Validation**: React Hook Form + Zod
+- **API**: Next.js API Routes (Route Handlers)
+- **Styling**: Tailwind CSS with custom utilities
+- **Icons**: Lucide React
+- **Performance**: next/image, dynamic imports, ISR
+- **Analytics**: Web Vitals tracking via sendBeacon
+
+---
+
+## 📖 Documentation
+
+- [API Documentation](docs/API.md)
+- [Architecture Overview](docs/ARCHITECTURE.md)
+- [Components Guide](docs/COMPONENTS.md)
+- [Sprint Reports](sprint-reports/)
+- Individual Sprint docs: SPRINT-1.md through SPRINT-5.md
+
+---
+
+## 🎉 Project is Ready!
+
+Your ShopHaoHung e-commerce application has successfully implemented:
+
+- ✅ Complete authentication system
+- ✅ Full admin CRUD functionality
+- ✅ Advanced search and filtering
+- ✅ Performance optimization (Sprint 5)
+- 🔄 Testing & CI/CD setup (Sprint 6 in progress)
+
+**Happy coding! 🚀**
+
 components/
-├── common/              # UI Components
-│   ├── Button.tsx      # (Primary, Secondary, Outline)
-│   ├── Input.tsx       # (with label, error, helper)
-│   ├── Skeleton.tsx    # (Loading placeholders)
+├── common/ # UI Components
+│ ├── Button.tsx # (Primary, Secondary, Outline)
+│ ├── Input.tsx # (with label, error, helper)
+│ ├── Skeleton.tsx # (Loading placeholders)
 │
-├── layout/             # Layout Components
-│   ├── Header.tsx      # Navigation & Auth
-│   ├── Footer.tsx      # Footer with links
-│   └── RootLayout.tsx  # Main layout wrapper
+├── layout/ # Layout Components
+│ ├── Header.tsx # Navigation & Auth
+│ ├── Footer.tsx # Footer with links
+│ └── RootLayout.tsx # Main layout wrapper
 │
-└── product/            # Product Components
-    └── ProductCard.tsx # Product display card
+└── product/ # Product Components
+└── ProductCard.tsx # Product display card
+
 ```
 
 ### ✅ Pages & Routes
 ```
-/ (Home)                    - Hero + Features showcase
-/shop                       - Product listing with search/filter/sort
-/auth/login                 - Login form
-/auth/signup                - Signup form
-```
+
+/ (Home) - Hero + Features showcase
+/about - Về chúng tôi (Giới thiệu, Tầm nhìn, Sứ mệnh)
+/guides - Trang hướng dẫn (Thanh toán, Chọn vợt, Mua hàng)
+/shop - Product listing with search/filter/sort
+/auth/login - Login form
+/auth/signup - Signup form
+
+````
 
 ### ✅ Features Implemented
 - [x] Product search with debounce
@@ -91,11 +242,12 @@ components/
 ```bash
 cd d:\JS\duan\sports-shop
 npm run dev
-```
+````
 
 Server runs at: **http://localhost:3000**
 
 ### Key Commands
+
 ```bash
 # Format code with Prettier
 npm run format
@@ -174,12 +326,14 @@ sports-shop/
 ## 🧪 Test the Application
 
 ### Demo Credentials
+
 ```
 Email: demo@example.com
 Password: 123456
 ```
 
 ### Test Flows
+
 1. **Home Page** - View hero section and features
 2. **Shop Page** - Search products, filter by category, sort
 3. **Login** - Try demo credentials
@@ -190,28 +344,30 @@ Password: 123456
 
 ## 📊 Sprint 1 Metrics
 
-| Metric | Value |
-|--------|-------|
-| Components | 7 |
-| Custom Hooks | 3 |
-| Pages | 5 |
-| Routes | 7 |
-| State Stores | 2 |
-| Mock Data Items | 13 |
-| Documentation Pages | 5 |
-| Lines of Code | ~1,800+ |
+| Metric              | Value   |
+| ------------------- | ------- |
+| Components          | 7       |
+| Custom Hooks        | 3       |
+| Pages               | 5       |
+| Routes              | 7       |
+| State Stores        | 2       |
+| Mock Data Items     | 13      |
+| Documentation Pages | 5       |
+| Lines of Code       | ~1,800+ |
 
 ---
 
 ## 🎨 Design System
 
 ### Colors
+
 - **Primary**: Blue (#3B82F6)
 - **Secondary**: Gray (#6B7280)
 - **Success**: Green (#10B981)
 - **Error**: Red (#EF4444)
 
 ### Components
+
 - Button (3 variants: primary, secondary, outline)
 - Input (with label, error, helper)
 - ProductCard (product display)
@@ -231,6 +387,7 @@ Password: 123456
 ## 🔒 Authentication (Sprint 1 - Mock)
 
 Current implementation uses mock authentication:
+
 - Stored in localStorage
 - No real API calls
 - Demo credentials: demo@example.com / 123456
@@ -242,6 +399,7 @@ Current implementation uses mock authentication:
 ## 🌐 Next Steps - Sprint 2 (May 13-26)
 
 ### Planned Features
+
 - [ ] Real authentication (JWT or NextAuth)
 - [ ] Protected routes middleware
 - [ ] User profile page
@@ -250,6 +408,7 @@ Current implementation uses mock authentication:
 - [ ] Cart page & checkout
 
 ### Dependencies to Add
+
 ```json
 "next-auth": "^5.0.0"
 "axios": "^1.x.x"
@@ -271,23 +430,25 @@ All documentation is in the `/docs` directory:
 
 ## 🎯 Key Technologies
 
-| Tech | Purpose |
-|------|---------|
-| Next.js 15 | Framework |
-| React 19 | UI Library |
-| TypeScript | Type Safety |
-| Tailwind CSS | Styling |
-| Zustand | State Management |
-| React Hook Form | Form Handling |
-| Zod | Validation |
-| TanStack React Query | Data Fetching |
+| Tech                 | Purpose          |
+| -------------------- | ---------------- |
+| Next.js 15           | Framework        |
+| React 19             | UI Library       |
+| TypeScript           | Type Safety      |
+| Tailwind CSS         | Styling          |
+| Zustand              | State Management |
+| React Hook Form      | Form Handling    |
+| Zod                  | Validation       |
+| TanStack React Query | Data Fetching    |
 
 ---
 
 ## 🤝 Development Workflow
 
 ### Git Commits
+
 Follow Conventional Commits:
+
 ```bash
 git commit -m "feat: add product search"
 git commit -m "fix: cart calculation"
@@ -295,6 +456,7 @@ git commit -m "docs: update README"
 ```
 
 ### Code Quality
+
 - ESLint runs on pre-commit
 - Prettier auto-formats on save
 - TypeScript strict mode enabled
@@ -324,7 +486,7 @@ git commit -m "docs: update README"
 ✅ Shopping cart  
 ✅ Toast notifications  
 ✅ Responsive design  
-✅ TypeScript type safety  
+✅ TypeScript type safety
 
 ---
 
@@ -342,6 +504,7 @@ git commit -m "docs: update README"
 ## 📈 Project Status
 
 **Sprint 1**: ✅ COMPLETE (May 1-12, 2024)
+
 - All goals achieved
 - Project foundation established
 - Ready for Sprint 2

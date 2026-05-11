@@ -1,63 +1,76 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
-import { User } from '@/types';
+import { useCallback, useEffect } from 'react';
 import { API_ENDPOINTS } from '@/constants';
+import { useAuthStore } from '@/store/authStore';
+import { useCartStore } from '@/store/cartStore';
+import type { User } from '@/types';
 
 const STORAGE_KEY = 'shop-haohung-auth';
 
-interface AuthContextType {
+interface StoredSession {
   user: User | null;
   token: string | null;
-  isLoading: boolean;
-  isHydrated: boolean;
+}
+
+function readStoredSession() {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  const stored = window.localStorage.getItem(STORAGE_KEY);
+  if (!stored) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(stored) as StoredSession;
+  } catch {
+    window.localStorage.removeItem(STORAGE_KEY);
+    return null;
+  }
 }
 
 export function useAuth() {
-  const [auth, setAuth] = useState<AuthContextType>({
-    user: null,
-    token: null,
-    isLoading: false,
-    isHydrated: false,
-  });
+  const user = useAuthStore((state) => state.user);
+  const token = useAuthStore((state) => state.token);
+  const isLoading = useAuthStore((state) => state.isLoading);
+  const isHydrated = useAuthStore((state) => state.isHydrated);
+  const setSession = useAuthStore((state) => state.setSession);
+  const setLoading = useAuthStore((state) => state.setLoading);
+  const setHydrated = useAuthStore((state) => state.setHydrated);
+  const clearSession = useAuthStore((state) => state.clearSession);
 
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    const stored = readStoredSession();
+
+    if (!stored?.user || !stored.token) {
+      useCartStore.getState().loadCartForUser(null);
+      setHydrated(true);
       return;
     }
 
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      setAuth((prev) => ({ ...prev, isHydrated: true }));
-      return;
+    setSession(stored.user, stored.token);
+    useCartStore.getState().loadCartForUser(stored.user);
+  }, [setHydrated, setSession]);
+
+  const persistSession = useCallback((nextUser: User | null, nextToken: string | null) => {
+    if (nextUser && nextToken) {
+      const nextSession: StoredSession = { user: nextUser, token: nextToken };
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(nextSession));
+      setSession(nextUser, nextToken);
+      useCartStore.getState().loadCartForUser(nextUser);
+      return nextSession;
     }
 
-    try {
-      const parsed = JSON.parse(stored) as Omit<AuthContextType, 'isLoading'>;
-      setAuth({ ...parsed, isLoading: false, isHydrated: true });
-    } catch {
-      localStorage.removeItem(STORAGE_KEY);
-      setAuth((prev) => ({ ...prev, isHydrated: true }));
-    }
-  }, []);
-
-  const persistSession = useCallback((user: User | null, token: string | null) => {
-    const nextAuth = { user, token, isLoading: false, isHydrated: true };
-    setAuth(nextAuth);
-
-    if (typeof window !== 'undefined') {
-      if (user && token) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(nextAuth));
-      } else {
-        localStorage.removeItem(STORAGE_KEY);
-      }
-    }
-
-    return nextAuth;
-  }, []);
+    window.localStorage.removeItem(STORAGE_KEY);
+    clearSession();
+    useCartStore.getState().loadCartForUser(null);
+    return { user: null, token: null };
+  }, [clearSession, setSession]);
 
   const login = useCallback(async (email: string, password: string) => {
-    setAuth((prev) => ({ ...prev, isLoading: true }));
+    setLoading(true);
     try {
       const response = await fetch(API_ENDPOINTS.AUTH_LOGIN, {
         method: 'POST',
@@ -72,13 +85,13 @@ export function useAuth() {
         return { success: false, error: payload?.error || 'Login failed' };
       }
 
-      const nextAuth = persistSession(payload.data.user, payload.data.token);
-      return { success: true, user: nextAuth.user, token: nextAuth.token };
+      const nextSession = persistSession(payload.data.user, payload.data.token);
+      return { success: true, user: nextSession.user, token: nextSession.token };
     } catch {
-      setAuth((prev) => ({ ...prev, isLoading: false }));
+      setLoading(false);
       return { success: false, error: 'Login failed' };
     }
-  }, [persistSession]);
+  }, [persistSession, setLoading]);
 
   const logout = useCallback(() => {
     void fetch(API_ENDPOINTS.AUTH_LOGOUT, { method: 'POST' });
@@ -86,7 +99,7 @@ export function useAuth() {
   }, [persistSession]);
 
   const signup = useCallback(async (email: string, password: string, name: string) => {
-    setAuth((prev) => ({ ...prev, isLoading: true }));
+    setLoading(true);
     try {
       const response = await fetch(API_ENDPOINTS.AUTH_SIGNUP, {
         method: 'POST',
@@ -101,13 +114,13 @@ export function useAuth() {
         return { success: false, error: payload?.error || 'Signup failed' };
       }
 
-      const nextAuth = persistSession(payload.data.user, payload.data.token);
-      return { success: true, user: nextAuth.user, token: nextAuth.token };
+      const nextSession = persistSession(payload.data.user, payload.data.token);
+      return { success: true, user: nextSession.user, token: nextSession.token };
     } catch {
-      setAuth((prev) => ({ ...prev, isLoading: false }));
+      setLoading(false);
       return { success: false, error: 'Signup failed' };
     }
-  }, [persistSession]);
+  }, [persistSession, setLoading]);
 
   const refreshSession = useCallback(async () => {
     try {
@@ -126,11 +139,14 @@ export function useAuth() {
   }, [persistSession]);
 
   return {
-    ...auth,
+    user,
+    token,
+    isLoading,
+    isHydrated,
     login,
     logout,
     signup,
     refreshSession,
-    isAuthenticated: !!auth.user,
+    isAuthenticated: !!user,
   };
 }

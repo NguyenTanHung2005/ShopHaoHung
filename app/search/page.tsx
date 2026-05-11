@@ -1,14 +1,20 @@
 'use client';
 
 import { useState, useCallback, useMemo } from 'react';
-import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { MOCK_PRODUCTS } from '@/lib/mock-data';
 import { useProductFilter, getFilterOptions, type FilterOptions } from '@/hooks/useProductFilter';
 import { useCartStore } from '@/store/cartStore';
 import { ProductCard } from '@/components/product/ProductCard';
+import { useUIStore } from '@/store/uiStore';
+import { useAuth } from '@/hooks';
 
 export default function SearchPage() {
   const addItem = useCartStore((state) => state.addItem);
+  const addToast = useUIStore((state) => state.addToast);
+  const { isAuthenticated, isHydrated } = useAuth();
+  const pathname = usePathname();
+  const router = useRouter();
   const [filters, setFilters] = useState<FilterOptions>({
     sortBy: 'newest',
   });
@@ -18,7 +24,7 @@ export default function SearchPage() {
   const filtered = useProductFilter(MOCK_PRODUCTS, filters);
 
   const handleFilterChange = useCallback(
-    (key: keyof FilterOptions, value: any) => {
+    (key: keyof FilterOptions, value: string | number | undefined) => {
       setFilters((prev) => ({
         ...prev,
         [key]: value || undefined,
@@ -29,9 +35,17 @@ export default function SearchPage() {
 
   const handleAddToCart = useCallback(
     (product: (typeof MOCK_PRODUCTS)[0]) => {
+      if (!isHydrated || !isAuthenticated) {
+        addToast({ message: 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng', type: 'warning', duration: 2500 });
+        router.push(`/auth/login?redirect=${encodeURIComponent(pathname ?? '/shop')}`);
+        return;
+      }
+
       addItem(product, 1);
+      addToast({ message: `Thêm vào giỏ hàng thành công`, type: 'success', duration: 2000 });
+      router.push('/cart');
     },
-    [addItem]
+    [addItem, addToast, isAuthenticated, isHydrated, pathname, router]
   );
 
   const handleReset = useCallback(() => {
@@ -207,14 +221,13 @@ export default function SearchPage() {
                   </button>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-4 xl:gap-5">
                   {filtered.map((product) => (
-                    <Link key={product.id} href={`/shop/${product.id}`}>
-                      <ProductCard
-                        product={product}
-                        onAddToCart={() => handleAddToCart(product)}
-                      />
-                    </Link>
+                    <ProductCard
+                      key={product.id}
+                      product={product}
+                      onAddToCart={() => handleAddToCart(product)}
+                    />
                   ))}
                 </div>
               )}

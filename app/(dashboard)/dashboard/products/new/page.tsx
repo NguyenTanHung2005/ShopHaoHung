@@ -125,7 +125,7 @@ export default function NewProductPage() {
 
       alert('Tạo sản phẩm thành công!');
       dispatch({ type: 'SUBMIT_SUCCESS' });
-      router.push('/products');
+      router.push('/dashboard/products');
     } catch {
       dispatch({ type: 'SUBMIT_FAIL' });
       alert('Tạo sản phẩm thất bại, vui lòng thử lại');

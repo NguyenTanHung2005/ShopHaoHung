@@ -40,7 +40,7 @@ export default function DashboardPage() {
         <StatCard title="💰 Doanh thu" value={formatCurrency(revenue)} description="Tổng doanh thu mock" tone="green" icon={<span>₫</span>} />
         <StatCard title="📦 Đơn hàng" value={String(MOCK_ORDERS.length)} description="Tổng số đơn hàng" tone="blue" icon={<span>📦</span>} />
         <StatCard title="👥 Người dùng" value={String(MOCK_USERS.length)} description="Tài khoản hệ thống" tone="amber" icon={<span>👥</span>} />
-        <StatCard title="🛍️ Sản phẩm" value={String(MOCK_PRODUCTS.length)} description="Sản phẩm trong kho" tone="purple" icon={<span>🛍️</span>} />
+        <StatCard title="🛍️ Sản phẩm" value={String(MOCK_PRODUCTS.length)} description="Sản phẩm trong kho" tone="rose" icon={<span>🛍️</span>} />
       </div>
 
       <div className="grid gap-6 xl:grid-cols-[1.15fr_0.85fr]">

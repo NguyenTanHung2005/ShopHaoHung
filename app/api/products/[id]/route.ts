@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { MOCK_PRODUCTS } from '@/lib/mock-data';
+import { deleteProduct, getProduct, updateProduct } from '@/lib/admin-store';
 
 interface RouteContext {
   params: Promise<{ id: string }>;
@@ -7,7 +7,7 @@ interface RouteContext {
 
 export async function GET(_: Request, { params }: RouteContext) {
   const { id } = await params;
-  const product = MOCK_PRODUCTS.find((item) => item.id === id);
+  const product = getProduct(id);
 
   if (!product) {
     return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 });
@@ -19,27 +19,20 @@ export async function GET(_: Request, { params }: RouteContext) {
 export async function PUT(request: Request, { params }: RouteContext) {
   const { id } = await params;
   const body = await request.json();
-  const product = MOCK_PRODUCTS.find((item) => item.id === id);
+  const product = updateProduct(id, body);
 
   if (!product) {
     return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 });
   }
 
-  return NextResponse.json({
-    success: true,
-    data: {
-      ...product,
-      ...body,
-      updatedAt: new Date().toISOString(),
-    },
-  });
+  return NextResponse.json({ success: true, data: product });
 }
 
 export async function DELETE(_: Request, { params }: RouteContext) {
   const { id } = await params;
-  const product = MOCK_PRODUCTS.find((item) => item.id === id);
+  const deleted = deleteProduct(id);
 
-  if (!product) {
+  if (!deleted) {
     return NextResponse.json({ success: false, error: 'Product not found' }, { status: 404 });
   }
 

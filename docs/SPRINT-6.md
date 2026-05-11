@@ -1,23 +1,24 @@
 # Sprint 6 - Testing, CI/CD & Deployment
 
 **Thời gian**: Tuần 11-12  
-**Trạng thái**: 🔄 Planned
+**Trạng thái**: 🔄 In Progress
 
 ## 📌 Mục Tiêu Sprint
 
-- [ ] Unit tests (Jest + React Testing Library)
-- [ ] E2E tests (Playwright)
-- [ ] GitHub Actions CI/CD pipeline
+- [x] Unit tests (Jest + React Testing Library)
+- [x] E2E tests (Playwright)
+- [x] GitHub Actions CI/CD pipeline
 - [ ] Vercel deployment automation
-- [ ] Environment setup (dev, staging, prod)
+- [x] Environment setup (dev, staging, prod)
 - [ ] Documentation finalization
-- [ ] Final bug fixes & polish
+- [x] Final bug fixes & polish
 
 ## 📊 Key Tasks
 
 ### 1. Unit Testing
-- [ ] Test setup (Jest, React Testing Library)
-- [ ] Component tests:
+
+- [x] Test setup (Jest, React Testing Library)
+- [x] Component tests:
   - Button, Input, Badge components
   - ProductCard
   - Cart functionality
@@ -27,35 +28,40 @@
 - [ ] Coverage target: 80%+
 
 ### 2. Integration Testing
+
 - [ ] Auth flow (login/signup/logout)
 - [ ] Cart operations (add/remove/update)
 - [ ] Search & filter
 - [ ] Dashboard access control
 
 ### 3. E2E Testing (Playwright)
-- [ ] User journey: Browse → Search → Cart → Checkout
+
+- [x] User journey: Browse → Search → Cart → Checkout (Basic Home page flow created)
 - [ ] Admin journey: Dashboard → Manage Products
 - [ ] Auth flow: Signup → Login → Profile → Logout
 - [ ] Protected routes access
 - [ ] Demo quick login
 
 ### 4. CI/CD Pipeline
-- [ ] GitHub Actions workflow
-  - Lint (ESLint)
-  - Type check (tsc)
-  - Build verification
-  - Test suite
-  - Preview deployment (PR)
-  - Production deploy (main)
+
+- [x] GitHub Actions workflow
+  - [x] Lint (ESLint)
+  - [x] Type check (tsc)
+  - [x] Build verification
+  - [x] Test suite
+  - [ ] Preview deployment (PR)
+  - [ ] Production deploy (main)
 
 ### 5. Environment Configuration
-- [ ] .env.example with all variables
+
+- [x] .env.example with all variables
 - [ ] Environment-specific configs
 - [ ] Secrets management in GitHub
 - [ ] Vercel environment variables
 - [ ] Database connection (if applicable)
 
 ### 6. Deployment Setup
+
 - [ ] Vercel project configuration
 - [ ] Domain setup (optional)
 - [ ] SSL certificate (auto via Vercel)
@@ -64,6 +70,7 @@
 - [ ] Error tracking (Sentry optional)
 
 ### 7. Documentation
+
 - [ ] README finalization
 - [ ] API documentation
 - [ ] Contributing guidelines
@@ -72,22 +79,25 @@
 - [ ] Architecture diagrams
 
 ### 8. Final Polish
+
 - [ ] UI/UX tweaks
 - [ ] Accessibility audit
 - [ ] Performance tuning
-- [ ] Bug fixes from testing
+- [x] Bug fixes from testing (Fixed Next.js 15+ async params for Product Details)
 - [ ] Error handling improvements
 - [ ] Loading states
 
 ## 🛠️ Files to Create/Update
 
 ### Testing Files
-- [ ] `jest.config.js` (NEW)
-- [ ] `playwright.config.ts` (NEW)
-- [ ] `__tests__/` directory (NEW)
-- [ ] `.github/workflows/test.yml` (NEW)
+
+- [x] `jest.config.js` (NEW)
+- [x] `playwright.config.ts` (NEW)
+- [x] `__tests__/` directory (NEW)
+- [x] `.github/workflows/test.yml` (ci.yml UPDATED)
 
 ### Config Files
+
 - [ ] `.github/workflows/deploy-to-vercel.yml` (EXISTS)
 - [ ] `.env.example` (UPDATE)
 - [ ] `vercel.json` (UPDATE)
@@ -103,6 +113,7 @@
 ## 📖 Deployment Checklist
 
 Before Production:
+
 - [ ] All tests passing
 - [ ] Lint without warnings
 - [ ] Build succeeds

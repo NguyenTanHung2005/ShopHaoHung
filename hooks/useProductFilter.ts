@@ -12,6 +12,12 @@ export interface FilterOptions {
   sortBy?: 'name' | 'price-asc' | 'price-desc' | 'rating' | 'newest';
 }
 
+type ExtendedProduct = Product & {
+  subcategory?: string;
+  brand?: string;
+  material?: string | string[];
+};
+
 export function useProductFilter(products: Product[], filters: FilterOptions) {
   const filtered = useMemo(() => {
     let result = [...products];
@@ -41,17 +47,17 @@ export function useProductFilter(products: Product[], filters: FilterOptions) {
 
     // Filter by subcategory
     if (filters.subcategory) {
-      result = result.filter((p) => (p as any).subcategory === filters.subcategory);
+      result = result.filter((p) => (p as ExtendedProduct).subcategory === filters.subcategory);
     }
 
     // Filter by brand
     if (filters.brand) {
-      result = result.filter((p) => (p as any).brand === filters.brand);
+      result = result.filter((p) => (p as ExtendedProduct).brand === filters.brand);
     }
 
     // Filter by material
     if (filters.material) {
-      result = result.filter((p) => (p as any).material?.includes(filters.material));
+      result = result.filter((p) => (p as ExtendedProduct).material?.includes(filters.material as string));
     }
 
     // Sort
@@ -87,16 +93,16 @@ export function useProductFilter(products: Product[], filters: FilterOptions) {
 // Helper to get unique values for filters
 export function getFilterOptions(products: Product[]) {
   const brands = Array.from(
-    new Set(products.map((p: any) => p.brand).filter(Boolean))
+    new Set(products.map((p) => (p as ExtendedProduct).brand).filter(Boolean))
   );
   const materials = Array.from(
-    new Set(products.map((p: any) => p.material).filter(Boolean))
+    new Set(products.map((p) => (p as ExtendedProduct).material).filter(Boolean).flat())
   );
   const categories = Array.from(
     new Set(products.map((p) => p.category).filter(Boolean))
   );
   const subcategories = Array.from(
-    new Set(products.map((p: any) => p.subcategory).filter(Boolean))
+    new Set(products.map((p) => (p as ExtendedProduct).subcategory).filter(Boolean))
   );
   const prices = products.map((p) => p.price).sort((a, b) => a - b);
 

@@ -286,7 +286,7 @@ export default function DemoPage() {
         <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border-2 border-emerald-200 rounded-3xl p-8 text-center">
           <h3 className="text-xl font-bold text-emerald-900 mb-3">💡 Lưu ý</h3>
           <p className="text-emerald-800 mb-4">
-            Đây là tài khoản demo dành để thử nghiệm. Bạn có thể đăng nhập nhanh bằng nút "Đăng nhập ngay" hoặc sử dụng form đăng nhập thường.
+            Đây là tài khoản demo dành để thử nghiệm. Bạn có thể đăng nhập nhanh bằng nút &quot;Đăng nhập ngay&quot; hoặc sử dụng form đăng nhập thường.
           </p>
           <p className="text-sm text-emerald-700">
             💾 Dữ liệu được lưu trong trình duyệt (localStorage), sẽ bị xóa khi làm sạch bộ nhớ cache.

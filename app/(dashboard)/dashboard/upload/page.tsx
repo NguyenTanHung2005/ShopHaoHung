@@ -68,15 +68,16 @@ export default function UploadPage() {
         <div className="text-4xl mb-2">📁</div>
         <p className="text-lg font-semibold text-slate-900 mb-2">Kéo thả tệp ở đây</p>
         <p className="text-sm text-slate-600 mb-4">hoặc chọn từ máy tính</p>
-        <label>
+        <label htmlFor="file-upload">
           <input
+            id="file-upload"
             type="file"
             multiple
             onChange={handleFileSelect}
             className="hidden"
             accept="image/*,.pdf,.doc,.docx"
           />
-          <Button variant="primary" size="sm" onClick={(e) => e.currentTarget.parentElement?.querySelector('input')?.click()}>
+          <Button variant="primary" size="sm" onClick={() => document.getElementById('file-upload')?.click()}>
             Chọn file
           </Button>
         </label>

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { MOCK_PRODUCTS } from '@/lib/mock-data';
+import { createProduct, listProducts } from '@/lib/admin-store';
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const page = Number(url.searchParams.get('page') || 1);
   const limit = Number(url.searchParams.get('limit') || 12);
 
-  let products = [...MOCK_PRODUCTS];
+  let products = listProducts();
 
   if (search) {
     products = products.filter((product) =>
@@ -36,12 +36,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const body = await request.json();
-  const createdProduct = {
-    id: `product-${Date.now()}`,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    ...body,
-  };
+  const createdProduct = createProduct(body);
 
   return NextResponse.json({ success: true, data: createdProduct }, { status: 201 });
 }
