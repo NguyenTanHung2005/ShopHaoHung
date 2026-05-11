@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'Dashboard',
-  description: 'Khu quản trị cho Sports Shop',
+  description: 'Khu quản trị cho ShopHaoHung',
 };
 
 const dashboardLinks = [

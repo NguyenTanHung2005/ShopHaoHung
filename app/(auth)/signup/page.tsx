@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -25,9 +25,11 @@ type SignupForm = z.infer<typeof signupSchema>;
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { signup } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const redirectTo = searchParams.get('redirect') || '/account';
 
   const {
     register,
@@ -44,7 +46,7 @@ export default function SignupPage() {
     try {
       const result = await signup(data.email, data.password, data.name);
       if (result.success) {
-        router.push('/');
+        router.push(redirectTo);
       } else {
         setError(result.error || 'Đăng ký thất bại');
       }
@@ -102,7 +104,7 @@ export default function SignupPage() {
       <div className="text-center text-sm">
         <p>
           Đã có tài khoản?{' '}
-          <Link href="/auth/login" className="text-blue-600 hover:underline">
+          <Link href={`/auth/login?redirect=${encodeURIComponent(redirectTo)}`} className="text-blue-600 hover:underline">
             Đăng nhập ngay
           </Link>
         </p>

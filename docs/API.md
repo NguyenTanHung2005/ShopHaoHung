@@ -2,7 +2,7 @@
 
 ## Overview
 
-Sports Shop API provides endpoints for products, orders, users, and authentication.
+ShopHaoHung API provides endpoints for products, orders, users, and authentication.
 
 **Base URL**: `http://localhost:3000/api`
 

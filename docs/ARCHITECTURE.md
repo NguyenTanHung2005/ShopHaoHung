@@ -1,6 +1,6 @@
 # Architecture Overview
 
-## Dự Án: Sports Shop Web Application
+## Dự Án: ShopHaoHung Web Application
 
 ### 🏗️ Kiến Trúc Tổng Quát
 
@@ -44,7 +44,7 @@
 ### 📁 Directory Structure & Responsibilities
 
 ```
-sports-shop/
+shop-haohung/
 ├── app/
 │   ├── (auth)/               # Auth layout group
 │   │   ├── login/

@@ -9,28 +9,29 @@ import { useAuth } from '@/hooks';
 
 export default function AccountPage() {
   const router = useRouter();
-  const { user, isAuthenticated, logout, refreshSession } = useAuth();
+  const { user, isAuthenticated, logout, refreshSession, isHydrated } = useAuth();
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (isHydrated && !isAuthenticated) {
       router.replace('/auth/login?redirect=/account');
     }
-  }, [isAuthenticated, router]);
+  }, [isAuthenticated, isHydrated, router]);
 
-  if (!user) {
-    return null;
+  if (!isHydrated || !user) {
+    return <div className="rounded-3xl border border-slate-200 bg-white p-10 text-slate-500 shadow-sm">Đang tải thông tin tài khoản...</div>;
   }
 
   return (
     <div className="space-y-8">
-      <div>
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-blue-600">Sprint 2</p>
-        <h1 className="text-3xl font-black tracking-tight text-slate-950">Tài khoản</h1>
+      <div className="rounded-[32px] border border-slate-200 bg-slate-950 px-8 py-8 text-white shadow-xl shadow-slate-950/10">
+        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-emerald-300">Thông tin tài khoản</p>
+        <h1 className="mt-3 text-4xl font-black tracking-tight">{user.name}</h1>
+        <p className="mt-3 max-w-2xl text-slate-300">Quản lý hồ sơ, cập nhật ảnh đại diện và theo dõi trạng thái tài khoản của bạn trong hệ thống Badminton Shop.</p>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+      <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div className="relative mx-auto mb-4 h-40 w-40 overflow-hidden rounded-full bg-slate-100">
+          <div className="relative mx-auto mb-4 h-40 w-40 overflow-hidden rounded-full bg-slate-100 ring-8 ring-slate-100">
             <Image src={user.avatar || '/assets/avatar-user.svg'} alt={user.name} fill className="object-cover" />
           </div>
           <div className="text-center">
@@ -40,9 +41,9 @@ export default function AccountPage() {
               <Badge variant={user.role === 'admin' ? 'primary' : 'success'}>{user.role}</Badge>
             </div>
           </div>
-          <div className="mt-6 space-y-3">
+          <div className="mt-6 grid gap-3">
             <Button variant="outline" fullWidth onClick={() => refreshSession()}>
-              Refresh session
+              Làm mới phiên
             </Button>
             <Button variant="secondary" fullWidth onClick={logout}>
               Đăng xuất
@@ -55,17 +56,31 @@ export default function AccountPage() {
             <h3 className="text-xl font-semibold text-slate-950">Thông tin cá nhân</h3>
             <div className="mt-4 grid gap-4 md:grid-cols-2">
               <div className="rounded-2xl bg-slate-50 p-4">
-                <div className="text-sm text-slate-500">Full name</div>
+                <div className="text-sm text-slate-500">Tên hiển thị</div>
                 <div className="font-medium text-slate-950">{user.name}</div>
               </div>
               <div className="rounded-2xl bg-slate-50 p-4">
-                <div className="text-sm text-slate-500">Role</div>
+                <div className="text-sm text-slate-500">Vai trò</div>
                 <div className="font-medium text-slate-950">{user.role}</div>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-4">
+                <div className="text-sm text-slate-500">Email</div>
+                <div className="font-medium text-slate-950">{user.email}</div>
+              </div>
+              <div className="rounded-2xl bg-slate-50 p-4">
+                <div className="text-sm text-slate-500">Trạng thái</div>
+                <div className="font-medium text-slate-950">Đang hoạt động</div>
               </div>
             </div>
           </div>
 
-          <ImageUpload label="Cập nhật avatar" />
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+            <h3 className="text-xl font-semibold text-slate-950">Cập nhật hồ sơ</h3>
+            <p className="mt-2 text-sm leading-7 text-slate-500">Tải ảnh mới lên để đồng bộ avatar với trang web và phần thanh điều hướng.</p>
+            <div className="mt-4">
+              <ImageUpload label="Cập nhật avatar" />
+            </div>
+          </div>
         </div>
       </div>
     </div>

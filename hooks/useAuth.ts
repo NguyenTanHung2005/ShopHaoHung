@@ -4,12 +4,13 @@ import { useCallback, useEffect, useState } from 'react';
 import { User } from '@/types';
 import { API_ENDPOINTS } from '@/constants';
 
-const STORAGE_KEY = 'sports-shop-auth';
+const STORAGE_KEY = 'shop-haohung-auth';
 
 interface AuthContextType {
   user: User | null;
   token: string | null;
   isLoading: boolean;
+  isHydrated: boolean;
 }
 
 export function useAuth() {
@@ -17,6 +18,7 @@ export function useAuth() {
     user: null,
     token: null,
     isLoading: false,
+    isHydrated: false,
   });
 
   useEffect(() => {
@@ -26,19 +28,21 @@ export function useAuth() {
 
     const stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
+      setAuth((prev) => ({ ...prev, isHydrated: true }));
       return;
     }
 
     try {
       const parsed = JSON.parse(stored) as Omit<AuthContextType, 'isLoading'>;
-      setAuth({ ...parsed, isLoading: false });
+      setAuth({ ...parsed, isLoading: false, isHydrated: true });
     } catch {
       localStorage.removeItem(STORAGE_KEY);
+      setAuth((prev) => ({ ...prev, isHydrated: true }));
     }
   }, []);
 
   const persistSession = useCallback((user: User | null, token: string | null) => {
-    const nextAuth = { user, token, isLoading: false };
+    const nextAuth = { user, token, isLoading: false, isHydrated: true };
     setAuth(nextAuth);
 
     if (typeof window !== 'undefined') {

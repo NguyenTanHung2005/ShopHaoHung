@@ -1,5 +1,5 @@
-export const APP_NAME = 'Sports Shop';
-export const APP_DESCRIPTION = 'Cửa hàng bán đồ thể thao trực tuyến';
+export const APP_NAME = 'ShopHaoHung';
+export const APP_DESCRIPTION = 'Cửa hàng bán vợt cầu lông và phụ kiện trực tuyến';
 
 // Navigation
 export const NAV_ITEMS = [
@@ -11,10 +11,9 @@ export const NAV_ITEMS = [
 
 // Product Categories
 export const PRODUCT_CATEGORIES = [
-  { id: 'shoes', name: 'Giày' },
-  { id: 'apparel', name: 'Quần áo' },
-  { id: 'accessories', name: 'Phụ kiện' },
-  { id: 'equipment', name: 'Thiết bị' },
+  { id: 'rackets', name: 'Vợt cầu lông' },
+  { id: 'shuttlecocks', name: 'Ống cầu lông' },
+  { id: 'sets', name: 'Bộ sản phẩm' },
 ];
 
 // Sort options

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,9 +18,11 @@ type LoginForm = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { login } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const redirectTo = searchParams.get('redirect') || '/account';
 
   const {
     register,
@@ -37,7 +39,7 @@ export default function LoginPage() {
     try {
       const result = await login(data.email, data.password);
       if (result.success) {
-        router.push('/');
+        router.push(redirectTo);
       } else {
         setError(result.error || 'Đăng nhập thất bại');
       }
@@ -79,7 +81,7 @@ export default function LoginPage() {
       <div className="text-center text-sm">
         <p>
           Chưa có tài khoản?{' '}
-          <Link href="/auth/signup" className="text-blue-600 hover:underline">
+          <Link href={`/auth/signup?redirect=${encodeURIComponent(redirectTo)}`} className="text-blue-600 hover:underline">
             Đăng ký ngay
           </Link>
         </p>
@@ -88,7 +90,7 @@ export default function LoginPage() {
       {/* Demo credentials */}
       <div className="bg-blue-50 border border-blue-200 p-3 rounded text-sm">
         <p className="font-semibold text-blue-900">Demo:</p>
-        <p className="text-blue-700">Email: demo@example.com</p>
+        <p className="text-blue-700">Email: user@example.com</p>
         <p className="text-blue-700">Pass: 123456</p>
       </div>
     </div>

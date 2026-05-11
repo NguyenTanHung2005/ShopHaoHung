@@ -17,6 +17,14 @@ export interface Product {
   price: number;
   category: string;
   image: string;
+  brand?: string;
+  material?: string;
+  segment?: string;
+  productType?: string;
+  discount?: number;
+  weight?: string;
+  quantity?: string;
+  subcategory?: 'professional' | 'intermediate' | 'beginner' | 'training' | 'tournament' | 'gift';
   stock: number;
   rating: number;
   reviews: number;
