@@ -88,10 +88,32 @@ export default function LoginPage() {
       </div>
 
       {/* Demo credentials */}
-      <div className="bg-blue-50 border border-blue-200 p-3 rounded text-sm">
-        <p className="font-semibold text-blue-900">Demo:</p>
-        <p className="text-blue-700">Email: user@example.com</p>
-        <p className="text-blue-700">Pass: 123456</p>
+      <div className="space-y-3">
+        <div className="bg-blue-50 border border-blue-200 p-4 rounded text-sm">
+          <p className="font-semibold text-blue-900 mb-2">👨‍💼 Admin Account:</p>
+          <p className="text-blue-700 text-xs">
+            <span className="font-mono bg-blue-100 px-2 py-1 rounded">admin@example.com</span>
+          </p>
+          <p className="text-blue-700 text-xs mt-1">
+            Pass: <span className="font-mono bg-blue-100 px-2 py-1 rounded">123456</span>
+          </p>
+        </div>
+
+        <div className="bg-slate-50 border border-slate-200 p-4 rounded text-sm">
+          <p className="font-semibold text-slate-900 mb-2">👤 User Account:</p>
+          <p className="text-slate-700 text-xs">
+            <span className="font-mono bg-slate-100 px-2 py-1 rounded">user@example.com</span>
+          </p>
+          <p className="text-slate-700 text-xs mt-1">
+            Pass: <span className="font-mono bg-slate-100 px-2 py-1 rounded">123456</span>
+          </p>
+        </div>
+
+        <Link href="/demo" className="block text-center">
+          <p className="text-blue-600 hover:text-blue-700 text-xs font-semibold">
+            📊 Xem trang Demo chi tiết →
+          </p>
+        </Link>
       </div>
     </div>
   );

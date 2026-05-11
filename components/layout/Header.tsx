@@ -47,6 +47,11 @@ export function Header() {
             </Link>
           </li>
           <li>
+            <Link href="/demo" className="rounded-full px-4 py-2 text-white/80 transition hover:bg-white/10 hover:text-white">
+              📊 Demo
+            </Link>
+          </li>
+          <li>
             <Link href="/cart" className="flex items-center gap-2 rounded-full px-4 py-2 text-white/80 transition hover:bg-white/10 hover:text-white">
               <span>Giỏ hàng</span>
               <Badge variant="primary">{cartCount}</Badge>
