@@ -1,0 +1,82 @@
+
+> shop-haohung@0.1.0 lint
+> eslint .
+
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\orders\new\page.tsx
+  103:6  warning  React Hook useEffect has missing dependencies: 'state.productId' and 'state.userId'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\orders\page.tsx
+   6:10  warning  'Input' is defined but never used                     @typescript-eslint/no-unused-vars
+  16:10  warning  'createUserId' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  16:24  warning  'setCreateUserId' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\page.tsx
+  11:7  warning  'pendingOrders' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\products\[id]\edit\page.tsx
+  80:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\products\[id]\edit\page.tsx:80:7
+  78 |   useEffect(() => {
+  79 |     try {
+> 80 |       setIsLoading(true);
+     |       ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  81 |       setLoadError('');
+  82 |
+  83 |       const product = productId ? getStoredProduct(productId) : null;  react-hooks/set-state-in-effect
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\products\page.tsx
+  12:9   warning  'router' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  32:10  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\products\page.tsx:32:10
+  30 |
+  31 |   useEffect(() => {
+> 32 |     void loadProducts();
+     |          ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  33 |   }, []);
+  34 |
+  35 |   useEffect(() => {  react-hooks/set-state-in-effect
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\users\[id]\edit\page.tsx
+  6:15  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\users\new\page.tsx
+  6:15  warning  'User' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(dashboard)\dashboard\users\page.tsx
+   6:18  warning  'Input' is defined but never used                   @typescript-eslint/no-unused-vars
+  13:10  warning  'createName' is assigned a value but never used     @typescript-eslint/no-unused-vars
+  13:22  warning  'setCreateName' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(shop)\shop\ClientShopPage.tsx
+   6:18  warning  'Input' is defined but never used                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+  22:9   warning  The 'products' logical expression could make the dependencies of useMemo Hook (at line 59) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'products' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(shop)\shop\[id]\ClientProductDetail.tsx
+  4:10  warning  'useCallback' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\(shop)\shop\page.tsx
+  6:18  warning  'Input' is defined but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\app\page.tsx
+  42:9  warning  'newProducts' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+D:\JS\duan\ShopHaoHung\ShopHaoHung\hooks\useFetch.ts
+  45:16  warning  React Hook useEffect has a spread element in its dependency array. This means we can't statically verify whether you've passed the correct dependencies  react-hooks/exhaustive-deps
+
+✖ 19 problems (2 errors, 17 warnings)
+

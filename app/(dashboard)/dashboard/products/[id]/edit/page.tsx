@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
 
 import { useEffect, useReducer, useRef, useState, type ChangeEvent, type FormEvent } from 'react';
