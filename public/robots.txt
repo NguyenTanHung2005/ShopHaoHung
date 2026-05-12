@@ -1,0 +1,30 @@
+# ShopHaoHung Robots Configuration
+# Allow all robots for optimal SEO
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /search?
+
+# Crawl delay
+Crawl-delay: 1
+
+# Specific crawler optimizations
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Sitemaps
+Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: http://localhost:3000/sitemap-products.xml
+
+# Site-specific rules
+Host: localhost:3000

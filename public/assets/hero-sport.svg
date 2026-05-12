@@ -1,0 +1,18 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1200" height="800" rx="48" fill="url(#paint0_linear_1_2)"/>
+<circle cx="260" cy="220" r="140" fill="#FFFFFF" fill-opacity="0.10"/>
+<circle cx="980" cy="620" r="180" fill="#FFFFFF" fill-opacity="0.08"/>
+<path d="M340 530C430 420 560 380 680 410C790 438 870 526 900 642H300C295 603 311 565 340 530Z" fill="#FFFFFF" fill-opacity="0.16"/>
+<path d="M420 510L535 330C552 302 593 295 620 316L735 404C759 422 760 458 737 479L644 565C626 582 598 583 580 568L458 566C435 564 408 538 420 510Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M508 318L560 388L517 438L466 357L508 318Z" fill="#0F172A" fill-opacity="0.08"/>
+<path d="M620 316L690 352L640 418L560 388L620 316Z" fill="#0F172A" fill-opacity="0.10"/>
+<text x="80" y="120" fill="white" font-size="56" font-weight="700" font-family="Arial, sans-serif">ShopHaoHung</text>
+<text x="80" y="184" fill="#E5E7EB" font-size="28" font-weight="400" font-family="Arial, sans-serif">Gear up with premium sports essentials</text>
+<defs>
+<linearGradient id="paint0_linear_1_2" x1="0" y1="0" x2="1200" y2="800" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0F172A"/>
+<stop offset="0.55" stop-color="#1D4ED8"/>
+<stop offset="1" stop-color="#14B8A6"/>
+</linearGradient>
+</defs>
+</svg>

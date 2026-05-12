@@ -1,0 +1,9 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="600" rx="40" fill="#F0FDF4"/>
+<circle cx="620" cy="140" r="110" fill="#DCFCE7"/>
+<path d="M286 182L350 150C372 138 404 136 430 146L514 178L564 228L606 206L642 254L598 318V470C598 492 580 510 558 510H242C220 510 202 492 202 470V318L158 254L194 206L230 228L286 182Z" fill="#16A34A"/>
+<path d="M286 182L320 242C338 274 366 294 400 294C434 294 462 274 480 242L514 178" stroke="#DCFCE7" stroke-width="24" stroke-linecap="round"/>
+<path d="M306 248H494" stroke="#FFFFFF" stroke-opacity="0.8" stroke-width="18" stroke-linecap="round"/>
+<text x="60" y="90" fill="#166534" font-size="42" font-weight="700" font-family="Arial, sans-serif">Training Shirt</text>
+<text x="60" y="140" fill="#15803D" font-size="22" font-weight="400" font-family="Arial, sans-serif">Breathable and quick dry</text>
+</svg>

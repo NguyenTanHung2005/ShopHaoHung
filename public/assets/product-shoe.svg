@@ -1,0 +1,9 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="800" height="600" rx="40" fill="#EFF6FF"/>
+<circle cx="640" cy="100" r="120" fill="#DBEAFE"/>
+<path d="M140 360C190 300 246 292 296 300C332 305 350 322 378 354L446 426C466 447 502 456 530 446L620 414C640 407 660 415 670 433C682 454 666 482 640 486L256 520C206 525 160 498 132 456L116 432C96 401 117 381 140 360Z" fill="#1D4ED8"/>
+<path d="M162 380L296 392C330 395 362 382 388 360L438 320L490 372L428 430C394 463 345 476 300 469L184 451C154 446 138 414 162 380Z" fill="#FFFFFF" fill-opacity="0.95"/>
+<path d="M468 354L530 332L580 364L520 394L468 354Z" fill="#93C5FD"/>
+<text x="60" y="90" fill="#1E3A8A" font-size="42" font-weight="700" font-family="Arial, sans-serif">Running Shoes</text>
+<text x="60" y="140" fill="#2563EB" font-size="22" font-weight="400" font-family="Arial, sans-serif">Lightweight performance footwear</text>
+</svg>
