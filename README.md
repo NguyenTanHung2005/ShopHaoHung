@@ -2,9 +2,8 @@
 
 Một ứng dụng e-commerce hiện đại để bán vợt cầu lông và phụ kiện, được xây dựng bằng **Next.js 16**, **React 19**, **TypeScript**, và **Tailwind CSS v4**.
 
-> 🎯 **Trạng thái**: Sprints 1, 2, 3, 4 ✅ | Sprint 5 ✅ (Phase 1+2) | Sprint 6 🔄
-
-🌐 **Live Demo**: [https://shop-hao-hung.vercel.app](https://shop-hao-hung.vercel.app?_vercel_share=SLT1g15D3ek7iB6RvSf5kCf5YXCu3isa)
+> 🎯 **Trạng thái**: Sprints 1, 2, 3, 4 ✅ | Sprint 5 ✅ (Phase 1+2) | Sprint 6 ✅
+> 🌐 **Live Demo**: [https://shop-hao-hung.vercel.app](https://shop-hao-hung.vercel.app?_vercel_share=SLT1g15D3ek7iB6RvSf5kCf5YXCu3isa)
 
 ---
 
@@ -127,12 +126,12 @@ npm run start
 - [x] SSR/SSG/ISR strategy (ISR on shop listing; SSG for About/Terms)
 - [x] Core Web Vitals improvement (Testing phase)
 
-### Sprint 6 🔄 - Testing & Deployment
+### Sprint 6 ✅ - Testing & Deployment
 
 - [x] Unit tests (Jest)
 - [x] E2E tests (Playwright)
 - [x] CI/CD (GitHub Actions)
-- [ ] Production deployment
+- [x] Production deployment
 
 ---
 
@@ -174,8 +173,7 @@ npm run start
 
 ### 📊 Demo Page
 
-- **Live Demo**: [https://shop-hao-hung.vercel.app](https://shop-hao-hung.vercel.app?_vercel_share=SLT1g15D3ek7iB6RvSf5kCf5YXCu3isa)
-- Thông tin đăng nhập nội bộ: Xem trang **`/demo`** (hoặc click "📊 Demo" ở header)
+Xem trang demo: **[https://shop-hao-hung.vercel.app](https://shop-hao-hung.vercel.app?_vercel_share=SLT1g15D3ek7iB6RvSf5kCf5YXCu3isa)**
 
 ### 👨‍💼 Admin Account
 
@@ -210,103 +208,75 @@ npm run start
 
 ## 🚀 Deployment
 
-### Vercel via GitHub Actions
+Dự án được cấu hình tối ưu để deploy lên Vercel. Bạn có thể sử dụng một trong các cách sau:
 
-1. Tạo các GitHub secrets sau:
-   - `VERCEL_TOKEN`
-   - `VERCEL_ORG_ID`
-   - `VERCEL_PROJECT_ID`
-2. Push code lên GitHub.
-3. Workflow `.github/workflows/deploy-to-vercel.yml` sẽ tự deploy preview cho mỗi push/PR.
-4. Nếu muốn production, vào GitHub Actions và chạy workflow thủ công, chọn `production = true`.
+### 1. Deploy qua Vercel Dashboard (Khuyên dùng)
 
-### GitHub Secrets
+Cách đơn giản nhất để deploy là kết nối repository với Vercel:
 
-Tạo 3 secrets này trong repository settings để workflow chạy ngay:
+1. Đăng nhập vào [Vercel](https://vercel.com) và chọn **Add New Project**.
+2. Import repository GitHub của bạn.
+3. Vercel sẽ tự động nhận diện dự án **Next.js**. Các thiết lập build mặc định (như `npm run build`) đã chuẩn.
+4. Click **Deploy**. Vercel sẽ cung cấp cho bạn một URL live ngay khi hoàn thành.
 
-- `VERCEL_TOKEN`: token từ Vercel Account Settings
-- `VERCEL_ORG_ID`: ID team/org trên Vercel
-- `VERCEL_PROJECT_ID`: ID project Vercel đã link với repo
+### 2. Deploy qua Vercel CLI
 
-### Cách lấy 3 secrets
+Nếu bạn muốn deploy trực tiếp từ terminal:
 
-1. Lấy `VERCEL_TOKEN`:
-   - Đăng nhập Vercel
-   - Vào `Account Settings` > `Tokens`
-   - Tạo token mới và copy giá trị vừa tạo
+```bash
+# Cài đặt Vercel CLI
+npm i -g vercel
 
-2. Lấy `VERCEL_ORG_ID`:
-   - Mở project trên Vercel hoặc chạy `vercel link`
-   - `orgId` sẽ nằm trong file `.vercel/project.json` sau khi link
-   - Nếu dùng team, đây là ID của team đó
+# Đăng nhập vào Vercel
+vercel login
 
-3. Lấy `VERCEL_PROJECT_ID`:
-   - Mở `.vercel/project.json` sau khi link project
-   - Copy giá trị `projectId`
+# Deploy môi trường preview
+vercel
 
-4. Thêm secrets vào GitHub:
-   - Vào repository trên GitHub
-   - Mở `Settings` > `Secrets and variables` > `Actions`
-   - Chọn `New repository secret` và thêm 3 giá trị ở trên
+# Deploy môi trường production
+vercel --prod
+```
 
-5. Chạy deploy:
-   - Push code lên GitHub để preview deploy tự chạy
-   - Vào tab `Actions` và bấm `Run workflow` với `production = true` nếu muốn deploy production
+### 3. Deploy qua GitHub Actions
 
-### Product Storage
+Dự án có sẵn workflow CI/CD tại `.github/workflows/deploy-to-vercel.yml`.
 
-Product CRUD hiện dùng `localStorage` thay vì database.
+1. Tạo 3 GitHub secrets trong `Settings > Secrets and variables > Actions`:
+   - `VERCEL_TOKEN`: Lấy từ **Vercel Account Settings > Tokens**.
+   - `VERCEL_ORG_ID`: Xem file `.vercel/project.json` sau khi link project (nếu đã dùng Vercel CLI) hoặc lấy ID team của bạn.
+   - `VERCEL_PROJECT_ID`: Xem trong `Settings > General` của project trên Vercel.
+2. Push code lên GitHub. Workflow sẽ tự động deploy một bản preview cho mỗi lần push/PR.
+3. Để deploy bản production, vào tab **Actions**, chọn workflow `Deploy to Vercel`, nhấn `Run workflow` và đặt tham số `production = true`.
 
-- Dữ liệu gốc được seed từ `lib/badminton-products.json`
-- Tạo/sửa/xóa sẽ cập nhật `localStorage` key `shophaohung.products`
-- Shop và dashboard cùng đọc từ nguồn này để hiển thị đồng bộ
+---
 
-### Core Web Vitals (Testing Phase)
+### 🛠️ Troubleshooting & Lưu ý khi Deploy (Next.js 16)
 
-Mục tiêu của Sprint 5 là giữ các chỉ số chính ở mức tốt trên cả desktop và mobile.
+Trong quá trình phát triển và deploy ứng dụng, chúng tôi đã xử lý một số vấn đề thường gặp với Next.js App Router:
 
-- **LCP**: tối ưu hero image, ưu tiên tải ảnh quan trọng bằng `next/image` và `priority`
-- **CLS**: cố định kích thước ảnh, layout ổn định, tránh render nhảy khi tải dữ liệu
-- **INP/FID**: giảm JavaScript không cần thiết, dùng dynamic import cho component nặng
-- **Tracking**: metrics được gửi qua `lib/web-vitals.ts` tới `/api/vitals`
+- **Lỗi Prerendering (Static Generation) với Client Components**: Nếu bạn sử dụng hook `useSearchParams()` ở Client Component, component đó bắt buộc phải được bọc trong một `<Suspense>` boundary. Nếu không có Suspense, quá trình chạy lệnh `next build` sẽ thất bại.
+- **Lỗi cấu hình `sitemap.ts`**: Với App Router, file `sitemap.ts` (Dynamic Sitemap) phải trả về một mảng (Array) trực tiếp. Tránh trả về `NextResponse` hoặc `Response` (chỉ dùng cho Route Handlers).
+- **Tránh ghi đè `vercel.json`**: Vercel hỗ trợ Next.js native ("Zero Configuration"). Việc định nghĩa `vercel.json` với các config outdated (như sửa output directory thủ công) sẽ dễ gây lỗi build không cần thiết.
 
-#### Cách kiểm tra nhanh
+---
 
-1. Mở trang Home, Shop, Product Detail và Dashboard trên mobile viewport.
-2. Chạy Lighthouse hoặc Chrome DevTools Performance.
-3. Kiểm tra log từ `/api/vitals` để xem LCP, INP, CLS có bị vượt ngưỡng không.
-4. Nếu cần tối ưu thêm, ưu tiên ảnh hero, bundle lớn và các component render đầu trang.
+### 📦 Lưu ý về Data Storage trên Production
 
-### Production Deployment Runbook
+Phiên bản hiện tại đang sử dụng **LocalStorage** (Client-side) thay vì Database thực tế (để tiện cho mục đích demo & presentation):
 
-Workflow deploy nằm ở `.github/workflows/deploy-to-vercel.yml`.
+- Dữ liệu gốc sản phẩm được tự động seed vào trình duyệt từ file tĩnh `lib/badminton-products.json`.
+- Các tính năng **Thêm/Sửa/Xóa sản phẩm** ở Dashboard hay tính năng **Giỏ hàng** sẽ cập nhật `localStorage` tại trình duyệt của người dùng hiện tại.
+- **Hạn chế**: Khi deploy lên môi trường public, dữ liệu admin thao tác sẽ không đồng bộ cho khách hàng khác, vì mỗi người dùng đang sử dụng storage trên thiết bị cá nhân của họ.
 
-#### Preview deploy
+---
 
-1. Push code hoặc mở Pull Request.
-2. GitHub Actions sẽ chạy job preview tự động.
-3. Kiểm tra URL preview trong tab Actions.
+### ⚡ Tối ưu Core Web Vitals (Sprint 5)
 
-#### Production deploy
+Để đảm bảo hiệu năng tối đa trên Vercel:
 
-1. Vào GitHub repository > `Actions`.
-2. Chọn workflow `Deploy to Vercel`.
-3. Bấm `Run workflow`.
-4. Chọn `production = true` để chạy job production manual.
-5. Đảm bảo 3 secrets đã tồn tại: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
-
-#### Trước khi deploy production
-
-- Build phải pass
-- Lint và test không lỗi
-- Kiểm tra lại trang `/shop`, `/dashboard/products`, `/cart`
-- Xác nhận localStorage product flow vẫn hoạt động đúng
-
-### ⚠️ Troubleshooting Next.js App Router Deployments (Vercel)
-
-- **Lỗi `prerender-error` với `useSearchParams`**: Trong quá trình build (`npm run build`), Next.js mặc định render tĩnh các trang. Bắt buộc phải wrap các Client Component có sử dụng `useSearchParams` trong một `<Suspense>` boundary để Next.js có thể build thành công. Đã fix ở các trang Auth (Login, Signup).
-- **Lỗi `sitemap.ts` (TypeError: e.some is not a function)**: File `app/sitemap.ts` trong Next.js App Router phải dùng `export default function sitemap()` và trả về một **Mảng (Array)** các route. Trình biên dịch sẽ tự động chuyển đổi thành file XML, không tự trả về chuỗi XML thủ công hoặc đối tượng `Response`.
-- **Lỗi Cấu hình `vercel.json`**: Tránh sử dụng file `vercel.json` có chứa thuộc tính `builds` kiểu cũ. Vercel tự động nhận diện Next.js theo cơ chế zero-config, việc cấu hình thủ công có thể gây ghi đè và lỗi build.
+- **LCP (Largest Contentful Paint)**: Banner/Hero images dùng component `<Image>` của Next.js với thuộc tính `priority`.
+- **CLS (Cumulative Layout Shift)**: Mọi ảnh tĩnh đều được khai báo rõ `width`, `height`. Không gian render được cấp trước (Skeleton loading).
+- **Bundle Optimization**: Các thư viện nặng được chia nhỏ thông qua tính năng Server Components và Dynamic Imports (`next/dynamic`).
 
 ---
 

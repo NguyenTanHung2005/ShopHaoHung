@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopHaoHung – Tài Liệu Dự Án</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f172a;
+    --ink-soft: #334155;
+    --ink-muted: #64748b;
+    --paper: #f8f7f4;
+    --paper-warm: #f1ede6;
+    --accent: #1d4ed8;
+    --accent-soft: #dbeafe;
+    --accent-mid: #3b82f6;
+    --gold: #b45309;
+    --gold-soft: #fef3c7;
+    --green: #065f46;
+    --green-soft: #d1fae5;
+    --red: #991b1b;
+    --red-soft: #fee2e2;
+    --border: #e2ddd6;
+    --shadow: 0 1px 3px rgba(15,23,42,0.08), 0 8px 24px rgba(15,23,42,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 30%, rgba(59,130,246,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 70%, rgba(29,78,216,0.14) 0%, transparent 55%);
+  }
+  .cover-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+  .cover-sub {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 3rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .cover-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 4rem;
+  }
+  .pill {
+    padding: 0.35rem 1rem;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.06);
+  }
+  .cover-meta {
+    position: relative;
+    display: flex;
+    gap: 3rem;
+    color: rgba(255,255,255,0.35);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+  }
+  .cover-meta span strong { color: rgba(255,255,255,0.6); display: block; font-size: 14px; text-transform: none; letter-spacing: 0; margin-bottom: 2px; }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* ── TOC ── */
+  .toc-section {
+    background: var(--paper-warm);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 0;
+  }
+  .toc-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  .toc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 1.5rem;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+  }
+  .toc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+  }
+  .toc-item:hover { background: #e8e4dc; color: var(--accent); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-muted);
+    min-width: 20px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .section:last-child { border-bottom: none; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    flex-shrink: 0;
+    padding-top: 6px;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 2rem 0 0.8rem;
+    letter-spacing: 0.01em;
+  }
+
+  p { margin-bottom: 1rem; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── OVERVIEW GRID ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 600px) { .overview-grid { grid-template-columns: 1fr; } }
+  .ov-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .ov-card-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+    margin-bottom: 0.4rem;
+    font-family: 'DM Mono', monospace;
+  }
+  .ov-card-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--ink);
+    font-family: 'Playfair Display', serif;
+  }
+  .ov-card-desc {
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-top: 0.3rem;
+    line-height: 1.5;
+  }
+
+  /* ── TECH TABLE ── */
+  .tech-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    font-size: 14px;
+  }
+  .tech-table thead tr {
+    background: var(--ink);
+    color: #fff;
+  }
+  .tech-table th {
+    padding: 0.9rem 1.2rem;
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+  }
+  .tech-table td {
+    padding: 0.85rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-soft);
+    vertical-align: middle;
+  }
+  .tech-table tr:last-child td { border-bottom: none; }
+  .tech-table tr:hover td { background: var(--paper-warm); }
+  .tech-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── SPRINT TIMELINE ── */
+  .sprint-list { display: flex; flex-direction: column; gap: 1px; }
+  .sprint-item {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 0;
+    position: relative;
+  }
+  .sprint-aside {
+    padding: 1.5rem 1.5rem 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.4rem;
+    border-right: 2px solid var(--border);
+    position: relative;
+  }
+  .sprint-aside::after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent-mid);
+    position: absolute;
+    right: -6px;
+    top: 1.85rem;
+  }
+  .sprint-item.done .sprint-aside::after { background: #10b981; }
+  .sprint-item.progress .sprint-aside::after { background: var(--gold); }
+  .sprint-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+  }
+  .sprint-weeks {
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+  .sprint-body { padding: 1.4rem 0 1.4rem 1.8rem; }
+  .sprint-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 2px 9px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+  }
+  .badge-done { background: var(--green-soft); color: var(--green); }
+  .badge-progress { background: var(--gold-soft); color: var(--gold); }
+  .sprint-desc { font-size: 13.5px; color: var(--ink-muted); line-height: 1.6; }
+  .sprint-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.8rem;
+  }
+  .sprint-tag {
+    padding: 2px 9px;
+    border-radius: 5px;
+    font-size: 11.5px;
+    background: var(--paper-warm);
+    border: 1px solid var(--border);
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ── ROUTES TABLE ── */
+  .route-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .route-table thead tr { background: var(--ink); color: #fff; }
+  .route-table th {
+    padding: 0.8rem 1.1rem;
+    text-align: left;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    font-weight: 500;
+  }
+  .route-table td {
+    padding: 0.75rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink-soft);
+    vertical-align: middle;
+  }
+  .route-table tr:last-child td { border-bottom: none; }
+  .route-table tr:hover td { background: var(--paper-warm); }
+  .route-path {
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .route-type {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  .rt-public { background: var(--green-soft); color: var(--green); }
+  .rt-protected { background: var(--gold-soft); color: var(--gold); }
+  .rt-admin { background: var(--red-soft); color: var(--red); }
+
+  /* ── FEATURE CARDS ── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+  .feature-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .feature-card-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+  }
+  .feature-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+  .feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .feature-list li {
+    font-size: 13px;
+    color: var(--ink-muted);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.5;
+  }
+  .feature-list li::before {
+    content: '–';
+    color: var(--accent-mid);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── ARCH BOX ── */
+  .arch-box {
+    background: var(--ink);
+    color: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    padding: 2rem 2.2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 12.5px;
+    line-height: 1.85;
+    white-space: pre;
+    overflow-x: auto;
+    box-shadow: var(--shadow);
+    margin: 1.5rem 0;
+  }
+
+  /* ── CREDS ── */
+  .creds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  @media (max-width: 550px) { .creds-grid { grid-template-columns: 1fr; } }
+  .cred-card {
+    border-radius: 14px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .cred-card.admin { background: #eff6ff; border-color: #bfdbfe; }
+  .cred-card.user  { background: #f8fafc; border-color: #e2e8f0; }
+  .cred-role {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 0.7rem;
+  }
+  .cred-card.admin .cred-role { color: var(--accent); }
+  .cred-card.user  .cred-role { color: var(--ink-muted); }
+  .cred-field {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink);
+    padding: 0.45rem 0.75rem;
+    background: rgba(255,255,255,0.8);
+    border-radius: 7px;
+    margin-bottom: 0.4rem;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .cred-label { font-size: 10px; color: var(--ink-muted); display: block; margin-bottom: 1px; }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 3rem 2rem;
+    font-size: 12.5px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .doc-footer strong { color: rgba(255,255,255,0.7); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 2rem 0;
+  }
+
+  code {
+    font-family: 'DM Mono', monospace;
+    background: var(--paper-warm);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.88em;
+    color: var(--accent);
+    border: 1px solid var(--border);
+  }
+
+  .note-box {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent-mid);
+    border-radius: 0 10px 10px 0;
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .note-box strong { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-tag">Tài Liệu Dự Án · Version 0.4.0-beta</div>
+  <h1>ShopHaoHung</h1>
+  <p class="cover-sub">Web Bán Vợt Cầu Lông &amp; Phụ Kiện Thể Thao</p>
+  <div class="cover-pills">
+    <span class="pill">Next.js 16</span>
+    <span class="pill">React 19</span>
+    <span class="pill">TypeScript</span>
+    <span class="pill">Tailwind CSS v4</span>
+    <span class="pill">Zustand</span>
+    <span class="pill">Zod</span>
+    <span class="pill">Playwright</span>
+  </div>
+  <div class="cover-meta">
+    <div><strong>Cập nhật</strong>12 Tháng 5, 2026</div>
+    <div><strong>Trạng thái</strong>Sprint 6 — Testing</div>
+    <div><strong>Loại</strong>E-Commerce SPA</div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc-section">
+  <div class="toc-inner">
+    <div class="toc-label">Mục Lục</div>
+    <div class="toc-grid">
+      <a href="#overview" class="toc-item"><span class="toc-num">01</span> Tổng Quan Dự Án</a>
+      <a href="#features" class="toc-item"><span class="toc-num">02</span> Tính Năng</a>
+      <a href="#architecture" class="toc-item"><span class="toc-num">03</span> Kiến Trúc</a>
+      <a href="#tech" class="toc-item"><span class="toc-num">04</span> Công Nghệ</a>
+      <a href="#sprints" class="toc-item"><span class="toc-num">05</span> Lộ Trình Sprint</a>
+      <a href="#routes" class="toc-item"><span class="toc-num">06</span> Routes &amp; Pages</a>
+      <a href="#api" class="toc-item"><span class="toc-num">07</span> API &amp; Dữ Liệu</a>
+      <a href="#demo" class="toc-item"><span class="toc-num">08</span> Demo &amp; Deploy</a>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 01: OVERVIEW -->
+<div class="section" id="overview">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Tổng Quan Dự Án</h2>
+    </div>
+
+    <div class="overview-grid">
+      <div class="ov-card">
+        <div class="ov-card-label">Loại Dự Án</div>
+        <div class="ov-card-value">E-Commerce</div>
+        <div class="ov-card-desc">Ứng dụng web thương mại điện tử chuyên bán vợt cầu lông và phụ kiện thể thao</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-card-label">Framework</div>
+        <div class="ov-card-value">Next.js 16</div>
+        <div class="ov-card-desc">App Router · React 19 · TypeScript · Tailwind CSS v4</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-card-label">Chu Kỳ Phát Triển</div>
+        <div class="ov-card-value">12 Tuần</div>
+        <div class="ov-card-desc">6 sprints, mỗi sprint 2 tuần. Hiện tại: Sprint 6 (Testing &amp; Deployment)</div>
+      </div>
+      <div class="ov-card">
+        <div class="ov-card-label">Triển Khai</div>
+        <div class="ov-card-value">Vercel</div>
+        <div class="ov-card-desc">CI/CD qua GitHub Actions · Preview &amp; Production deployment</div>
+      </div>
+    </div>
+
+    <p>ShopHaoHung là một ứng dụng thương mại điện tử hiện đại, được xây dựng theo mô hình SPA (Single Page Application) với kiến trúc <strong>App Router</strong> của Next.js. Dự án phục vụ hai nhóm người dùng chính: khách hàng mua sắm và quản trị viên quản lý cửa hàng.</p>
+    <p>Toàn bộ dữ liệu sản phẩm hiện được lưu qua <code>localStorage</code> với seed từ file <code>badminton-products.json</code>, cho phép trải nghiệm CRUD đầy đủ ngay trên trình duyệt mà không cần backend thực.</p>
+  </div>
+</div>
+
+<!-- SECTION 02: FEATURES -->
+<div class="section" id="features">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Tính Năng Chính</h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-icon">🛒</div>
+        <h4>Khách Hàng (User)</h4>
+        <ul class="feature-list">
+          <li>Duyệt sản phẩm với tìm kiếm, lọc, sắp xếp</li>
+          <li>Lọc theo danh mục, giá, trạng thái tồn kho</li>
+          <li>Trang chi tiết sản phẩm, hình ảnh lớn</li>
+          <li>Giỏ hàng lưu riêng theo tài khoản đã đăng nhập</li>
+          <li>Quy trình checkout &amp; xác nhận đơn hàng</li>
+          <li>Đăng nhập / Đăng ký / Hồ sơ cá nhân</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">👨‍💼</div>
+        <h4>Quản Trị Viên (Admin)</h4>
+        <ul class="feature-list">
+          <li>Dashboard tổng quan: doanh thu, đơn hàng, KPIs</li>
+          <li>CRUD sản phẩm – tạo, sửa, xóa realtime</li>
+          <li>Quản lý đơn hàng với bộ lọc trạng thái</li>
+          <li>Quản lý người dùng (Admin / User)</li>
+          <li>Báo cáo &amp; phân tích biểu đồ</li>
+          <li>Trang tải file &amp; quản lý tài nguyên</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">🔐</div>
+        <h4>Bảo Mật &amp; Xác Thực</h4>
+        <ul class="feature-list">
+          <li>JWT token + Cookie httpOnly</li>
+          <li>Session tự phục hồi khi reload trang</li>
+          <li>Role-based access control (RBAC)</li>
+          <li>Middleware bảo vệ route, AdminGuard component</li>
+          <li>Hydration flag chống flickering</li>
+          <li>Header cập nhật tức thì sau đăng nhập/logout</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-icon">⚡</div>
+        <h4>Performance &amp; SEO</h4>
+        <ul class="feature-list">
+          <li>Image optimization: next/image, WebP/AVIF</li>
+          <li>ISR trên shop listing (revalidate: 3600s)</li>
+          <li>SSG cho trang tĩnh (About, Terms)</li>
+          <li>Dynamic imports giảm bundle size</li>
+          <li>Web Vitals tracking: LCP, FID, CLS</li>
+          <li>SEO metadata, Open Graph, sitemap tự động</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 03: ARCHITECTURE -->
+<div class="section" id="architecture">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Kiến Trúc Hệ Thống</h2>
+    </div>
+
+    <div class="arch-box">Browser → Next.js 15 App Router
+│
+├── Pages (App Router Groups)
+│   ├── (auth)/        → /auth/login, /auth/signup
+│   ├── (shop)/        → /shop, /shop/[id]
+│   └── (dashboard)/   → /dashboard/**  [Admin only]
+│
+├── React Components
+│   ├── common/   → Button, Input, Skeleton
+│   ├── layout/   → Header, Footer, RootLayout
+│   └── product/  → ProductCard
+│
+├── State Management
+│   ├── cartStore   (Zustand)  → giỏ hàng theo user
+│   └── uiStore     (Zustand)  → toasts, modals
+│
+└── Data Layer
+    └── lib/product-storage.ts
+        → localStorage key: shophaohung.products
+        → Seed: lib/badminton-products.json</div>
+
+    <h3>Phân Lớp Dữ Liệu</h3>
+    <p>Dự án chia rõ ba lớp lưu trữ trạng thái:</p>
+
+    <div class="feature-grid" style="margin-top: 0.5rem;">
+      <div class="feature-card">
+        <h4>Global State – Zustand</h4>
+        <ul class="feature-list">
+          <li><strong>cartStore</strong>: items, total, addItem, removeItem, updateQuantity, clearCart</li>
+          <li><strong>uiStore</strong>: toasts, addToast, removeToast, clearToasts</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Local State – React useState</h4>
+        <ul class="feature-list">
+          <li>Form inputs, UI toggles</li>
+          <li>Filter tạm thời trên trang shop</li>
+          <li>Product form state ở dashboard</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Client Storage – localStorage</h4>
+        <ul class="feature-list">
+          <li><code>shophaohung.products</code>: danh mục sản phẩm đồng bộ admin ↔ shop</li>
+          <li>Session người dùng (token, thông tin user)</li>
+          <li>Giỏ hàng riêng theo <code>user.id</code></li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Luồng CRUD Sản Phẩm</h4>
+        <ul class="feature-list">
+          <li>Admin tạo/sửa/xóa → ghi vào localStorage</li>
+          <li>Seed tự động từ JSON khi lần đầu truy cập</li>
+          <li>Storage event đồng bộ dashboard &amp; shop ngay lập tức</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 04: TECH STACK -->
+<div class="section" id="tech">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Công Nghệ Sử Dụng</h2>
+    </div>
+    <table class="tech-table">
+      <thead>
+        <tr>
+          <th>Công Nghệ</th>
+          <th>Phiên Bản</th>
+          <th>Mục Đích</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Next.js</strong></td>
+          <td><span class="tech-badge">16.2.5</span></td>
+          <td>React framework – App Router, SSR/SSG/ISR, Image Optimization</td>
+        </tr>
+        <tr>
+          <td><strong>React</strong></td>
+          <td><span class="tech-badge">19</span></td>
+          <td>UI library, hooks, concurrent rendering</td>
+        </tr>
+        <tr>
+          <td><strong>TypeScript</strong></td>
+          <td><span class="tech-badge">5.x</span></td>
+          <td>Type safety, interface definitions cho Product, User, Order</td>
+        </tr>
+        <tr>
+          <td><strong>Tailwind CSS</strong></td>
+          <td><span class="tech-badge">v4</span></td>
+          <td>Utility-first styling, responsive design, purging CSS</td>
+        </tr>
+        <tr>
+          <td><strong>Zustand</strong></td>
+          <td><span class="tech-badge">4.x</span></td>
+          <td>Lightweight global state – cart &amp; UI store</td>
+        </tr>
+        <tr>
+          <td><strong>React Hook Form</strong></td>
+          <td><span class="tech-badge">7.x</span></td>
+          <td>Form handling – login, signup, checkout, CRUD forms</td>
+        </tr>
+        <tr>
+          <td><strong>Zod</strong></td>
+          <td><span class="tech-badge">3.x</span></td>
+          <td>Schema validation cho form input và API data</td>
+        </tr>
+        <tr>
+          <td><strong>Jest</strong></td>
+          <td>–</td>
+          <td>Unit testing – components, hooks, store, utilities</td>
+        </tr>
+        <tr>
+          <td><strong>Playwright</strong></td>
+          <td>–</td>
+          <td>E2E testing – user journeys, auth flow, checkout</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub Actions</strong></td>
+          <td>–</td>
+          <td>CI/CD pipeline – lint, build, test, Vercel deploy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 05: SPRINTS -->
+<div class="section" id="sprints">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Lộ Trình Sprint</h2>
+    </div>
+
+    <div class="sprint-list">
+
+      <div class="sprint-item done">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 1</span>
+          <span class="sprint-weeks">Tuần 1–2</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Setup, UI Base &amp; Routing
+            <span class="badge badge-done">✓ Hoàn thành</span>
+          </div>
+          <div class="sprint-desc">Khởi tạo Next.js project, cấu trúc thư mục, component library cơ bản (Button, Input, Skeleton), routing nhóm (auth/shop/dashboard), mock data, design system, custom hooks.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">Next.js Setup</span>
+            <span class="sprint-tag">Component Library</span>
+            <span class="sprint-tag">Routing</span>
+            <span class="sprint-tag">Mock Data</span>
+            <span class="sprint-tag">Zustand</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sprint-item done">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 2</span>
+          <span class="sprint-weeks">Tuần 3–4</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Auth &amp; Protected Routes
+            <span class="badge badge-done">✓ Hoàn thành</span>
+          </div>
+          <div class="sprint-desc">Hệ thống đăng nhập/đăng ký/logout qua mock API, cookie-based session, middleware bảo vệ route, trang account, RBAC (admin vs user), hydration flag chống flickering.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">JWT Auth</span>
+            <span class="sprint-tag">httpOnly Cookie</span>
+            <span class="sprint-tag">RBAC</span>
+            <span class="sprint-tag">Protected Routes</span>
+            <span class="sprint-tag">Session Persist</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sprint-item done">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 3</span>
+          <span class="sprint-weeks">Tuần 5–6</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Dashboard &amp; Admin Pages
+            <span class="badge badge-done">✓ Hoàn thành</span>
+          </div>
+          <div class="sprint-desc">Dashboard sidebar 6 mục, AdminGuard component, KPI overview, trang Products/Orders/Users/Reports/Upload. CRUD đầy đủ với API routes thực (POST/PUT/DELETE). Biểu đồ mini, bảng dữ liệu, badge trạng thái màu sắc.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">Admin Dashboard</span>
+            <span class="sprint-tag">CRUD API</span>
+            <span class="sprint-tag">AdminGuard</span>
+            <span class="sprint-tag">Charts</span>
+            <span class="sprint-tag">File Upload</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sprint-item done">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 4</span>
+          <span class="sprint-weeks">Tuần 7–8</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Search, Filter &amp; Shop Experience
+            <span class="badge badge-done">✓ Hoàn thành</span>
+          </div>
+          <div class="sprint-desc">Tìm kiếm realtime (debounce 300ms), filter danh mục/giá/tồn kho, sort đa tiêu chí, pagination, trang product detail, giỏ hàng đầy đủ, checkout flow, trang demo với quick login.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">Search &amp; Filter</span>
+            <span class="sprint-tag">Pagination</span>
+            <span class="sprint-tag">Product Detail</span>
+            <span class="sprint-tag">Cart &amp; Checkout</span>
+            <span class="sprint-tag">Demo Page</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sprint-item done">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 5</span>
+          <span class="sprint-weeks">Tuần 9–10</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Performance &amp; Optimization
+            <span class="badge badge-done">✓ Hoàn thành</span>
+          </div>
+          <div class="sprint-desc">next/image với WebP/AVIF, SEO metadata &amp; Open Graph, Web Vitals tracking (LCP/FID/CLS), HTTP caching headers, dynamic imports, ISR trên shop listing, SSG cho About/Terms, sitemap tự động, robots.txt.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">Image Optimization</span>
+            <span class="sprint-tag">SEO</span>
+            <span class="sprint-tag">Web Vitals</span>
+            <span class="sprint-tag">ISR/SSG</span>
+            <span class="sprint-tag">Bundle Optimization</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sprint-item progress">
+        <div class="sprint-aside">
+          <span class="sprint-label">Sprint 6</span>
+          <span class="sprint-weeks">Tuần 11–12</span>
+        </div>
+        <div class="sprint-body">
+          <div class="sprint-title">
+            Testing, CI/CD &amp; Deployment
+            <span class="badge badge-progress">⟳ Đang thực hiện</span>
+          </div>
+          <div class="sprint-desc">Unit tests với Jest + React Testing Library (coverage 80%+), E2E tests Playwright, GitHub Actions pipeline (lint → type check → build → test → deploy), Vercel deployment, tài liệu hóa cuối dự án.</div>
+          <div class="sprint-tags">
+            <span class="sprint-tag">Jest</span>
+            <span class="sprint-tag">Playwright E2E</span>
+            <span class="sprint-tag">GitHub Actions</span>
+            <span class="sprint-tag">Vercel Deploy</span>
+            <span class="sprint-tag">Documentation</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 06: ROUTES -->
+<div class="section" id="routes">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>Routes &amp; Pages</h2>
+    </div>
+    <table class="route-table">
+      <thead>
+        <tr>
+          <th>Route</th>
+          <th>Quyền truy cập</th>
+          <th>Mô tả</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="route-path">/</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Home page – Hero, tính năng nổi bật, CTA</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/shop</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Danh sách sản phẩm – tìm kiếm, lọc, phân trang (ISR)</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/shop/[id]</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Chi tiết sản phẩm – ảnh lớn, thông số, sản phẩm tương tự</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/demo</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Trang demo – quick login, bảng so sánh quyền hạn</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/auth/login</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Form đăng nhập với validation Zod</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/auth/signup</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Form đăng ký tài khoản mới</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/account</span></td>
+          <td><span class="route-type rt-protected">Protected</span></td>
+          <td>Hồ sơ cá nhân – thông tin user, lịch sử đơn hàng</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/cart</span></td>
+          <td><span class="route-type rt-protected">Protected</span></td>
+          <td>Giỏ hàng – số lượng, tổng tiền, checkout</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>Tổng quan: doanh thu, đơn hàng, KPI, biểu đồ</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard/products</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>CRUD sản phẩm – bảng, lọc, thêm/sửa/xóa</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard/orders</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>Quản lý đơn hàng – lọc theo trạng thái</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard/users</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>Quản lý người dùng – admin/user roles</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard/reports</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>Báo cáo doanh thu, top sản phẩm, phân tích</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/dashboard/upload</span></td>
+          <td><span class="route-type rt-admin">Admin</span></td>
+          <td>Tải file – drag &amp; drop, quản lý tài nguyên</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/about</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Giới thiệu công ty (SSG – static generated)</td>
+        </tr>
+        <tr>
+          <td><span class="route-path">/terms</span></td>
+          <td><span class="route-type rt-public">Public</span></td>
+          <td>Điều khoản sử dụng (SSG – static generated)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- SECTION 07: API & DATA -->
+<div class="section" id="api">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>API &amp; Dữ Liệu</h2>
+    </div>
+
+    <div class="note-box">
+      <strong>Lưu ý:</strong> Hiện tại sản phẩm được lưu qua <code>localStorage</code> (key: <code>shophaohung.products</code>). API routes vẫn tồn tại để tương thích, nhưng nguồn dữ liệu thực tế là client-side storage.
+    </div>
+
+    <h3>Nhóm Endpoints Chính</h3>
+    <table class="tech-table" style="margin-top: 0.5rem;">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Endpoint</th>
+          <th>Mô tả</th>
+          <th>Auth?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tech-badge" style="background:#d1fae5;color:#065f46">GET</span></td>
+          <td><code>/api/products</code></td>
+          <td>Danh sách sản phẩm (search, filter, sort, page)</td>
+          <td>Không</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#d1fae5;color:#065f46">GET</span></td>
+          <td><code>/api/products/:id</code></td>
+          <td>Chi tiết một sản phẩm</td>
+          <td>Không</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/products</code></td>
+          <td>Tạo sản phẩm mới</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#fef3c7;color:#b45309">PUT</span></td>
+          <td><code>/api/products/:id</code></td>
+          <td>Cập nhật sản phẩm</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#fee2e2;color:#991b1b">DEL</span></td>
+          <td><code>/api/products/:id</code></td>
+          <td>Xóa sản phẩm</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/auth/login</code></td>
+          <td>Đăng nhập – trả JWT + set cookie</td>
+          <td>Không</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/auth/signup</code></td>
+          <td>Đăng ký tài khoản mới</td>
+          <td>Không</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/auth/logout</code></td>
+          <td>Đăng xuất – clear cookie &amp; session</td>
+          <td>Có</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/orders</code></td>
+          <td>Tạo đơn hàng mới</td>
+          <td>User</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/upload</code></td>
+          <td>Upload ảnh (avatar / sản phẩm)</td>
+          <td>Admin</td>
+        </tr>
+        <tr>
+          <td><span class="tech-badge" style="background:#dbeafe;color:#1d4ed8">POST</span></td>
+          <td><code>/api/vitals</code></td>
+          <td>Ghi nhận Web Vitals metrics</td>
+          <td>Không</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Mô Hình Dữ Liệu</h3>
+    <div class="arch-box">// Product
+{
+  id: string;          name: string;
+  description: string; price: number;     // VND
+  category: string;    // shoes | apparel | accessories | equipment
+  image: string;       stock: number;
+  rating: number;      reviews: number;
+  createdAt: string;   updatedAt: string;
+}
+
+// User
+{
+  id: string;   email: string;   name: string;
+  role: "admin" | "user";        avatar?: string;
+  createdAt: string;
+}
+
+// Order
+{
+  id: string;       userId: string;
+  items: [{productId, quantity, price}];
+  totalPrice: number;
+  status: "pending" | "processing" | "shipped" | "delivered" | "cancelled";
+}</div>
+  </div>
+</div>
+
+<!-- SECTION 08: DEMO & DEPLOY -->
+<div class="section" id="demo">
+  <div class="wrapper">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Demo &amp; Triển Khai</h2>
+    </div>
+
+    <h3>Tài Khoản Demo</h3>
+    <div class="creds-grid">
+      <div class="cred-card admin">
+        <div class="cred-role">👨‍💼 Admin Account</div>
+        <div class="cred-field"><span class="cred-label">Email</span>admin@example.com</div>
+        <div class="cred-field"><span class="cred-label">Password</span>123456</div>
+        <div class="cred-field" style="background: transparent; border-color: transparent; font-size: 12px; color: #1d4ed8;">
+          → Truy cập Dashboard, CRUD toàn bộ
+        </div>
+      </div>
+      <div class="cred-card user">
+        <div class="cred-role">👤 User Account</div>
+        <div class="cred-field"><span class="cred-label">Email</span>user@example.com</div>
+        <div class="cred-field"><span class="cred-label">Password</span>123456</div>
+        <div class="cred-field" style="background: transparent; border-color: transparent; font-size: 12px; color: #64748b;">
+          → Mua sắm, giỏ hàng, hồ sơ cá nhân
+        </div>
+      </div>
+    </div>
+
+    <div class="note-box" style="margin-top: 1.5rem;">
+      Truy cập trang <code>/demo</code> để dùng nút <strong>Quick Login</strong> – đăng nhập ngay không cần điền form, chuyển hướng đúng trang theo role.
+    </div>
+
+    <h3>Cài Đặt &amp; Chạy Local</h3>
+    <div class="arch-box"># Cài dependencies
+npm install
+
+# Tạo file môi trường
+cp .env.example .env.local
+
+# Chạy development server
+npm run dev
+# → http://localhost:3000
+
+# Build production
+npm run build && npm run start
+
+# Chạy tests
+npm run test          # Unit tests (Jest)
+npx playwright test   # E2E tests</div>
+
+    <h3>Triển Khai Vercel qua GitHub Actions</h3>
+    <p>Workflow nằm ở <code>.github/workflows/deploy-to-vercel.yml</code>. Cần thiết lập 3 GitHub Secrets:</p>
+
+    <div class="feature-grid" style="margin-top: 0.5rem;">
+      <div class="feature-card">
+        <h4>GitHub Secrets cần thiết lập</h4>
+        <ul class="feature-list">
+          <li><code>VERCEL_TOKEN</code> – từ Vercel Account Settings → Tokens</li>
+          <li><code>VERCEL_ORG_ID</code> – trong file <code>.vercel/project.json</code></li>
+          <li><code>VERCEL_PROJECT_ID</code> – trong file <code>.vercel/project.json</code></li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Quy trình deploy</h4>
+        <ul class="feature-list">
+          <li>Push code → Preview deploy tự động chạy</li>
+          <li>Kiểm tra URL preview trong tab Actions</li>
+          <li>Vào Actions → Run workflow → chọn <code>production=true</code> để deploy production</li>
+          <li>URL production: <code>shop-haohung.vercel.app</code></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>CI/CD Pipeline (GitHub Actions)</h3>
+    <div class="arch-box">Push to GitHub
+    │
+    ├── Lint (ESLint)
+    ├── Type check (tsc --noEmit)
+    ├── Build verification (npm run build)
+    ├── Test suite (Jest + Playwright)
+    └── Deploy
+        ├── Preview → mọi push / PR
+        └── Production → manual trigger (production=true)</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <strong>ShopHaoHung</strong> · Tài liệu dự án · Version 0.4.0-beta<br>
+  Cập nhật lần cuối: 12 tháng 5, 2026
+</div>
+
+</body>
+</html>
