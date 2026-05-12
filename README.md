@@ -237,16 +237,6 @@ vercel
 vercel --prod
 ```
 
-### 3. Deploy qua GitHub Actions
-
-Dự án có sẵn workflow CI/CD tại `.github/workflows/deploy-to-vercel.yml`.
-
-1. Tạo 3 GitHub secrets trong `Settings > Secrets and variables > Actions`:
-   - `VERCEL_TOKEN`: Lấy từ **Vercel Account Settings > Tokens**.
-   - `VERCEL_ORG_ID`: Xem file `.vercel/project.json` sau khi link project (nếu đã dùng Vercel CLI) hoặc lấy ID team của bạn.
-   - `VERCEL_PROJECT_ID`: Xem trong `Settings > General` của project trên Vercel.
-2. Push code lên GitHub. Workflow sẽ tự động deploy một bản preview cho mỗi lần push/PR.
-3. Để deploy bản production, vào tab **Actions**, chọn workflow `Deploy to Vercel`, nhấn `Run workflow` và đặt tham số `production = true`.
 
 ---
 
